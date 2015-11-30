@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+@font-face {
+    font-family: Segoe Ui;
+    src: url('fonts/segoeui.eot');
+    src: local('☺'), url('fonts/segoeui.woff') format('woff'), url('fonts/segoeui.ttf') format('truetype'), url('fonts/segoeui.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: BenderRegular;
+    /* Гарнитура шрифта */
+    src: url(fonts/BenderRegular.ttf);
+    /* Путь к файлу со шрифтом */
+}
+
+body {
+    background: url("../images/bg.png") #22313f;
+    font: 18px Segoe Ui, Tahoma, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #674c47;
+}
+
+#page_align {
+    width: 1366px;
+    margin: 0 auto;
+    background: url("../images/page_bg.png") #fff;
+    overflow: hidden;
+}
+
+#sidebar {
+    width: 250px;
+    float: left;
+    background: #22313f;
+    color: #ffffff;
+    font-weight: lighter;
+}
+
+#sidebar ul {
+    margin-left: 0px;
+    list-style: none;
+    color: #ffffff;
+    line-height: 35px;
+    padding: 20px 40px 10px 30px;
+}
+
+#sidebar ul li a {
+    color: #fff;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #fffc01;
+}
+
+#sidebar ul li a:active {
+    color: red;
+}
+
+#content {
+    float: right;
+    width: 920px;
+    background: #fff;
+    color: #674c47;
+    display: block;
+    font-weight: 3000;
+    font-weight: lighter;
+    margin-left: -100px;
+    margin-top: 30px;
+    margin-right: 100px;
+     font-family: Segoe Ui;
+    
+    
+}
+
+#content h1 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#content p {
+    margin-top: 20px;
+    margin-left: 20px;
+    
+    
+}
+
+#content ul {
+    list-style: circle;
+    color: #674c47;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+
+#content a {
+    color: #674c47;
+    margin-top: 300px;
+    padding-bottom: 20px;
+    text-align: center;
+    height: 2.7em;
+    line-height: 2.7em;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 30px;
+   
+    
+}
+
+#content img {
+    overflow: hidden;
+    width: 250px;
+    vertical-align: middle;
+    padding: 50px 60px 60px 60px;
+}
+
+#content_main_img {
+    width: 250px;
+    margin: 0px 210px;
+}
+
+#top_menu {
+    width: 1000px;
+    height: 50px;
+    background: #22313f;
+    color: #ffffff;
+    padding-right: 250px;
+    margin-left: 250px;
+    text-align: center;
+}
+
+#top_menu a {
+    color: #ffffff;
+    margin: 30px 0px 0px 30px;
+    height: 2.7em;
+    line-height: 2.7em;
+    font-family: Bender;
+    font: BenderRegular;
+}
+
+#top_menu a:hover {
+    color: #fffc01;
+    margin: 30px 0px 0px 30px;
+    height: 2.7em;
+    line-height: 2.7em;
+    font-family: Bender;
+    font: BenderRegular;
+}
+
+#left_navigation {
+    color: #ddd9d8;
+    line-height: 305px;
+    border-bottom: solid 2px;
+    border-color: #FFF;
+    font-family: Bender;
+    font: BenderRegular;
+}
+
+#logo_side_bar {
+    border-bottom: solid 0px;
+    border-color: #FFF;
+    padding: 20px 40px 10px 30px;
+    color: #ffffff;
+}
+
+#logo_side_bar img {
+    height: 150px;
+    overflow: hidden;
+    float: left;
+    padding: 0px 0px 0px 0px;
+    margin-left: 0px;
+    margin-bottom: 30px;
+    background: #ffffff;
+    text-align: center;
+}
+
+#left_content {
+    margin-left: 3px;
+    list-style: none;
+    color: #ffffff;
+    line-height: 35px;
+    padding: 20px 0px 10px 30px;
+    border-bottom: solid 2px;
+    border-color: #FFF;
+}
+
+#left_content ul {
+    font-size: 14px;
+    margin-top: -20px;
+    margin-left: -30px;
+    line-height: 200%;
+    color: #ffffff;
+}
+
+#left_content2 {
+    margin-left: 3px;
+    list-style: none;
+    color: #ffffff;
+    line-height: 35px;
+    padding: 20px 40px 10px 30px;
+}
+
+#left_content2 ul {
+    font-size: 14px;
+    margin-top: -20px;
+    margin-left: -30px;
+    line-height: 200%;
+    color: #ffffff;
+}
+
+#user_login {
+    color:black;
+    text-align: right;
+}
+
+.clr {
+    clear: both;
+}

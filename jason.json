@@ -1,0 +1,41 @@
+{
+  "coord": {
+    "lon": 30.52,
+    "lat": 50.43
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "Sky is Clear",
+      "icon": "01n"
+    }
+  ],
+  "base": "cmc stations",
+  "main": {
+    "temp": 270.132,
+    "pressure": 1016.01,
+    "humidity": 93,
+    "temp_min": 270.132,
+    "temp_max": 270.132,
+    "sea_level": 1031.27,
+    "grnd_level": 1016.01
+  },
+  "wind": {
+    "speed": 2.56,
+    "deg": 44.5002
+  },
+  "clouds": {
+    "all": 0
+  },
+  "dt": 1448461357,
+  "sys": {
+    "message": 0.003,
+    "country": "UA",
+    "sunrise": 1448429286,
+    "sunset": 1448460084
+  },
+  "id": 703448,
+  "name": "Kiev",
+  "cod": 200
+}
