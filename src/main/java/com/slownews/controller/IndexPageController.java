@@ -36,12 +36,6 @@ public class IndexPageController extends HttpServlet {
 
         System.out.println(request.toString());
 
-        users = new HashMap<>();
-        User user = new User();
-        user.setUsername("admin");
-        user.setPassword("1234");
-        users.put(user.getUsername(), user);
-
         ServletContext context = request.getSession().getServletContext();
         context.setAttribute("users", users);
 
@@ -168,7 +162,13 @@ public class IndexPageController extends HttpServlet {
 
     Map<String, User> users;
 
-
-
+    @Override
+    public void init() {
+        users = new HashMap<>();
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("1234");
+        users.put(user.getUsername(), user);
+    }
 
 }
