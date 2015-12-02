@@ -45,7 +45,7 @@
         <jsp:include page="includeMenu.jsp"/>
         <c:if test="${not empty username}">
             <div id="user_login">
-                Welcome, ${username}!
+                Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
             </div>
         </c:if>
     </div>
@@ -69,9 +69,8 @@
             <h1 class="h1">Login form</h1>
 
 
-
                 <form action="LoginController" method="post" class="login_form">
-
+                        <br>
                         <p class="login_p">Enter your login: </p>
                         <br>
                         <input type="text" name="username" class="login_form_input">
@@ -84,7 +83,6 @@
                         <input type="submit" value="Login" name="button" class="button">
 
                 </form>
-
 
         </div>
 

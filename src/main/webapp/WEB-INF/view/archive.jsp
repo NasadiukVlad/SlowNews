@@ -1,4 +1,4 @@
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -17,6 +17,8 @@
 
             <div id="logo_side_bar">
                 <img src="images/logo.jpg">
+                News, from the last enter:
+                <div id="counter"></div>
             </div>
 
         </a>
@@ -32,6 +34,7 @@
 
         <div id="left_content2">
             <jsp:include page="includeLeftContent2.jsp"/>
+
         </div>
 
     </div>
@@ -40,41 +43,22 @@
         <jsp:include page="includeMenu.jsp"/>
         <c:if test="${not empty username}">
             <div id="user_login">
-                Welcome, ${username}!
+                Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
             </div>
         </c:if>
     </div>
 
-
     <div id="content">
 
-
-        <!--<h1>Investigate world with us!</h1>-->
-
-        12.10.15 <a href=".html">Developers weigh JSON, security proposals for Java EE 8</a>
-        <br>
-        05.05.15 <a href=".html">Oracle lays out plans for the next Java generation</a>
-        <br>
-        14.12.15 <a href=".html">Java developers carry hopes and fears to JavaOne</a>
-        <br>
-        27.01.15 <a href=".html">Oracle fixes critical flaws in Database Server, MySQL, Java</a>
-        <br>
-        30.06.15 <a href=".html">Word to API providers: Make it simple for developers</a>
-        <br>
-        08.11.15 <a href=".html">Oracle considers a new effort to develop mobile Java apps</a>
-        <br>
-        12.10.15 <a href=".html">Developers weigh JSON, security proposals for Java EE 8</a>
-        <br>
-        05.05.15 <a href=".html">Oracle lays out plans for the next Java generation</a>
-        <br>
-        14.12.15 <a href=".html">Java developers carry hopes and fears to JavaOne</a>
-        <br>
-        27.01.15 <a href=".html">Oracle fixes critical flaws in Database Server, MySQL, Java</a>
-        <br>
-        30.06.15 <a href=".html">Word to API providers: Make it simple for developers</a>
-        <br>
-        08.11.15 <a href=".html">Oracle considers a new effort to develop mobile Java apps</a>
-        <br>
+        <c:forEach items="${news}" var="element">
+            <td><h2>${element.title}</h2></td>
+            <br>
+            <td>${element.description}</td>
+            <br>
+            <td><a href="${element.link}">More...</a></td>
+            <br>
+            </tr>
+        </c:forEach>
 
 
     </div>

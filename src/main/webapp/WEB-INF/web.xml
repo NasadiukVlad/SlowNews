@@ -44,6 +44,16 @@
         <url-pattern>/ArchivePageController</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>com.slownews.controller.LogoutController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
@@ -56,9 +66,9 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.jpg</url-pattern>
-    </servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpg</url-pattern>
+</servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>

@@ -38,40 +38,30 @@
 
     <div id="top_menu">
         <jsp:include page="includeMenu.jsp"/>
-        <div id="user_login">
-            Welcome, ${username}!
-        </div>
+        <c:if test="${not empty username}">
+            <div id="user_login">
+                Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
+            </div>
+        </c:if>
     </div>
 
     <div id="content">
 
         <div id="login">
-            <h1>Registration form</h1>
-<%--
-            <p>Enter your name: </p>
-            <input type="text" size="40">
+            <h1 class="h1">Registration form</h1>
 
-            <p>Enter your password: </p>
-            <input type="text" size="40">
-            <br>
 
-            <p>Enter your e-mail: </p>
-            <input type="text" size="40">
-            <br>
-            <button>Registration</button>
-            <br>
-            <a href="login.html">Already have an acount? Login</a>--%>
-
-            <form action="RegistrationController" method="post">
-                <p>Enter your name: </p>
+            <form action="RegistrationController" method="post" class="login_form">
                 <br>
-                <input type="text" name="username">
+                <p class="login_p">Enter your name: </p>
                 <br>
-                <p>Enter your password: </p>
+                <input type="text" name="username" class="login_form_input">
                 <br>
-                <input type="password" name = "password">
+                <p class="login_p">Enter your password: </p>
                 <br>
-                <input type="submit" value = "Register" name="button" class = "buttons">
+                <input type="password" name = "password" class="login_form_input">
+                <br>
+                <input type="submit" value = "Register" name="button" class = "button">
 
             </form>
 

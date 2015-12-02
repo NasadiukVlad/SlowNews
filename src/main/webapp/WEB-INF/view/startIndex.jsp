@@ -45,7 +45,7 @@
         <jsp:include page="includeMenu.jsp"/>
         <c:if test="${not empty username}">
             <div id="user_login">
-                Welcome, ${username}!
+                Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
             </div>
         </c:if>
     </div>
