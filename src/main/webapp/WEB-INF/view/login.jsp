@@ -66,22 +66,22 @@
              <br>
              <a href=".html">Forgot your password ?</a>
  --%>
-            <h1>Login form</h1>
+            <h1 class="h1">Login form</h1>
 
 
 
-                <form action="LoginController" method="post">
+                <form action="LoginController" method="post" class="login_form">
 
-                        <p>Enter your login: </p>
+                        <p class="login_p">Enter your login: </p>
                         <br>
-                        <input type="text" name="username">
+                        <input type="text" name="username" class="login_form_input">
                         <br>
 
-                        <p>Enter your password: </p>
+                        <p class="login_p">Enter your password: </p>
                         <br>
-                        <input type="password" name="password">
+                        <input type="password" name="password" class="login_form_input">
                         <br>
-                        <input type="submit" value="Login" name="button">
+                        <input type="submit" value="Login" name="button" class="button">
 
                 </form>
 

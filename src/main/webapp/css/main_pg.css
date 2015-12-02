@@ -66,19 +66,14 @@ a {
 }
 
 #content {
-    float: right;
+
     width: 920px;
     background: #fff;
     color: #674c47;
     display: block;
-    font-weight: 3000;
     font-weight: lighter;
-    margin-left: 120px;
-    margin-top: 30px;
-    margin-right: 0px;
-    
+    margin: 30px 330px;
     font-size: 14px;
-    font-weight: 400;
     font-family: Bender;
     font: BenderRegular;
     
@@ -108,13 +103,14 @@ a {
     margin-top: 300px;
     padding-bottom: 20px;
     text-align: center;
-    height: 2.7em;
-    line-height: 2.7em;
+    height: 2.3em;
+    line-height: 2.3em;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
-    margin-left: 30px;
+    margin-left: 800px;
     font-family: Segoe Ui;
+
     
 }
 

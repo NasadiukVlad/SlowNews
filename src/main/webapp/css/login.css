@@ -93,18 +93,14 @@ a {
     margin-top: 10px;
 }
 
-#content p {
-    margin-top: 20px;
-    margin-left: 20px;
 
-}
 
-#content ul {
+/*#content ul {
     list-style: circle;
     color: #674c47;
     margin-left: 50px;
     margin-top: 10px;
-}
+}*/
 
 #content a {
     color: #674c47;
@@ -222,8 +218,8 @@ a {
     color: #ffffff;
 }
 
-#login form {
-    margin-top: 100px;
+.login_form {
+
     width: 700px;
     height: 370px;
     background: #22313f;
@@ -231,12 +227,19 @@ a {
     text-align: center;
 }
 
-#login h1 {
-    padding: 10px 10px 10px 10px;
+.h1  {
+    font-size: 35px;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 230px;
+    margin-top: 100px;
+    margin-bottom: 30px;
 }
 
-#login p {
+.login_p {
+    margin-top: 20px;
     font-size: 20px;
+    text-align: center;
 
 }
 
@@ -260,13 +263,16 @@ a {
 
 }
 
-#login form input {
+.login_form_input {
     margin-top: 10px;
-    margin-left: 40px;
+
+    height: 30px;
+    width: 250px;
+    text-align: center;
 
 }
 
-#login form input.button {
+.button {
     margin-top: 20px;
     width: 100px;
     height: 30px;
@@ -275,6 +281,7 @@ a {
     text-align: center;
     border-color: #fffc01;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 #user_login {

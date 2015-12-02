@@ -38,9 +38,11 @@
 
     <div id="top_menu">
         <jsp:include page="includeMenu.jsp"/>
-        <div id="user_login">
-            Welcome, ${username}!
-        </div>
+        <c:if test="${not empty username}">
+            <div id="user_login">
+                Welcome, ${username}!
+            </div>
+        </c:if>
     </div>
 
 
