@@ -54,6 +54,57 @@
         <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>HabrahabrMainNewsController</servlet-name>
+        <servlet-class>com.slownews.controller.HabrahabrMainNewsController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HabrahabrMainNewsController</servlet-name>
+        <url-pattern>/HabrahabrMainNewsController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JavaWorldNewsController</servlet-name>
+        <servlet-class>com.slownews.controller.JavaWorldNewsController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JavaWorldNewsController</servlet-name>
+        <url-pattern>/JavaWorldNewsController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BBCArchivePageController</servlet-name>
+        <servlet-class>com.slownews.controller.BBCArchivePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BBCArchivePageController</servlet-name>
+        <url-pattern>/BBCArchivePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+    <servlet-name>HabrahabrArchivePageController</servlet-name>
+    <servlet-class>com.slownews.controller.HabrahabrArchivePageController</servlet-class>
+</servlet>
+
+    <servlet-mapping>
+        <servlet-name>HabrahabrArchivePageController</servlet-name>
+        <url-pattern>/HabrahabrArchivePageController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JavaWorldArchivePageController</servlet-name>
+        <servlet-class>com.slownews.controller.JavaWorldArchivePageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JavaWorldArchivePageController</servlet-name>
+        <url-pattern>/JavaWorldArchivePageController</url-pattern>
+    </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>

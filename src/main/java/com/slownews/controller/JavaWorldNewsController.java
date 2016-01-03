@@ -1,17 +1,12 @@
 package com.slownews.controller;
 
-
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.slownews.domain.NewsArchive;
-import com.slownews.model.BBCNews;
-import com.slownews.model.BBCXpathMap;
-import com.slownews.model.User;
+import com.slownews.model.*;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,21 +21,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by Влад on 17.11.2015.
+ * Created by Влад on 02.01.2016.
  */
-public class IndexPageController extends HttpServlet {
-
-
+public class JavaWorldNewsController extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
 
         System.out.println(request.toString());
 
+        Map<String, User> users = null;
         ServletContext context = request.getSession().getServletContext();
-        context.setAttribute("users", users);
+        Object obj = context.getAttribute("users");
 
 
         String responseEntity = ClientBuilder.newClient()
@@ -95,7 +92,7 @@ public class IndexPageController extends HttpServlet {
 
         JAXBContext contextJAXB = null;
         try {
-            contextJAXB = JAXBContextFactory.createContext(new Class[]{BBCXpathMap.class}, null);
+            contextJAXB = JAXBContextFactory.createContext(new Class[]{JavaWorldNewsXPathMap.class}, null);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -107,17 +104,17 @@ public class IndexPageController extends HttpServlet {
             e.printStackTrace();
         }
 
-        URL xmlURL = new URL("http://feeds.bbci.co.uk/news/technology/rss.xml");
+        URL xmlURL = new URL("http://www.javaworld.com/index.rss");
 
         URLConnection conn = xmlURL.openConnection();
         conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
         conn.connect();
 
         InputStream xml = xmlURL.openStream();
-        BBCXpathMap bbcXpathMap = null;
+        JavaWorldNewsXPathMap javaWorldNewsXPathMap = null;
 
         try {
-            bbcXpathMap = (BBCXpathMap) unmarshaller.unmarshal(xml);
+            javaWorldNewsXPathMap = (JavaWorldNewsXPathMap) unmarshaller.unmarshal(xml);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -126,19 +123,31 @@ public class IndexPageController extends HttpServlet {
         List links = new ArrayList<String>();
         List descriptions = new ArrayList<String>();
 
-        titles = bbcXpathMap.getTitles();
-        links = bbcXpathMap.getLinks();
-        descriptions = bbcXpathMap.getDescriptions();
+        titles = javaWorldNewsXPathMap.getTitles();
+        links = javaWorldNewsXPathMap.getLinks();
+        descriptions = javaWorldNewsXPathMap.getDescriptions();
 
-        List<BBCNews> news = new LinkedList<>();
+        List<JavaWorldNews> news = new LinkedList<>();
 
 
         for (int i = 0; i < titles.size(); i++) {
 
             String title = titles.get(i).toString();
-            String description = descriptions.get(i).toString();
+            String description = descriptions.get(i).toString().replaceAll("\\<.*?>","");
             String link = links.get(i).toString();
-            BBCNews newsItem = new BBCNews(title, description, link);
+
+            int decriptionLength = description.length();
+
+            StringBuilder sb = new StringBuilder();
+
+            if (decriptionLength > 450) {
+                sb.append(description.substring(0, 450));
+                sb.append("...");
+            } else {
+                sb.append(description.substring(0, decriptionLength - 21));
+            }
+
+            JavaWorldNews newsItem = new JavaWorldNews(title, sb.toString(), link);
             news.add(newsItem);
 
             NewsArchive newsArchive = new NewsArchive();
@@ -161,22 +170,9 @@ public class IndexPageController extends HttpServlet {
         xml.close();
 
 
-
         RequestDispatcher rd = null;
-        rd = request.getRequestDispatcher("WEB-INF/view/startIndex.jsp");
+        rd = request.getRequestDispatcher("WEB-INF/view/JavaWorldNews.jsp");
+        response.setCharacterEncoding("windows-1251");
         rd.forward(request, response);
-
     }
-
-    Map<String, User> users;
-
-    @Override
-    public void init() {
-        users = new HashMap<>();
-        User user = new User();
-        user.setUsername("admin");
-        user.setPassword("1234");
-        users.put(user.getUsername(), user);
-    }
-
 }

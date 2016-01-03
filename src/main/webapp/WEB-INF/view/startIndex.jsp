@@ -4,10 +4,13 @@
 <html>
 
 <head>
-    <title>SlowChat</title>
+    <title>SlowNews</title>
     <meta charset="utf-8">
     <link href="css/main_pg.css" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript" src="js/jsCounter.js"></script>
+    <script type="text/javascript" src="js/scrollOnTop.js"></script>
+
 </head>
 
 <body>
@@ -18,9 +21,8 @@
         <a href="IndexPageController">
 
             <div id="logo_side_bar">
-                <img src="images/logo.jpg">
-                News, from the last enter:
-                <div id="counter"></div>
+               <img src="images/logo.jpg">
+                News, from the last enter: <div id="counter"></div>
             </div>
 
         </a>
@@ -30,9 +32,9 @@
         </div>
 
 
-        <div id="left_content">
+        <%--<div id="left_content">
             <jsp:include page="includeLeftContent.jsp"/>
-        </div>
+        </div>--%>
 
         <div id="left_content2">
             <jsp:include page="includeLeftContent2.jsp"/>
@@ -65,7 +67,7 @@
 
     </div>
 
-
+    <a href="#" id="toTop">TOP!</a>
 </div>
 
 

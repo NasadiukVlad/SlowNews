@@ -1,20 +1,19 @@
-<%@ page import="java.util.Random" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <head>
     <title>SlowChat</title>
     <meta charset="utf-8">
-    <link href="css/login.css" rel="stylesheet" type="text/css">
+    <link href="css/main_pg.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jsCounter.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/scrollOnTop.js"></script>
 </head>
 
 <body>
-
 <div id="page_align">
 
     <div id="sidebar">
@@ -23,6 +22,9 @@
 
             <div id="logo_side_bar">
                 <img src="images/logo.jpg">
+                News, from the last enter:
+                <div id="counter"></div>
+                Latest topic:
             </div>
 
         </a>
@@ -31,12 +33,14 @@
             <jsp:include page="includeLeftNavigation.jsp"/>
         </div>
 
-        <%--<div id="left_content">
+<%--
+        <div id="left_content">
             <jsp:include page="includeLeftContent.jsp"/>
         </div>--%>
 
         <div id="left_content2">
             <jsp:include page="includeLeftContent2.jsp"/>
+
         </div>
 
     </div>
@@ -50,32 +54,21 @@
         </c:if>
     </div>
 
-
     <div id="content">
 
-        <div id="login">
+        <c:forEach items="${news}" var="element">
+            <td><h2>${element.title}</h2></td>
+            <br>
+            <td>${element.description}</td>
+            <br>
+            <td><a href="${element.link}">More...</a></td>
+            <br>
+            </tr>
+        </c:forEach>
 
-            <h1 class="h1">Login form</h1>
-
-
-                <form action="LoginController" method="post" class="login_form">
-                        <br>
-                        <p class="login_p">Enter your login: </p>
-                        <br>
-                        <input type="text" name="username" class="login_form_input">
-                        <br>
-                        <p class="login_p">Enter your password: </p>
-                        <br>
-                        <input type="password" name="password" class="login_form_input">
-                        <br>
-                        <input type="submit" value="Login" name="button" class="button">
-
-                </form>
-
-        </div>
 
     </div>
-
+    <a href="#" id="toTop">TOP!</a>
 
 </div>
 

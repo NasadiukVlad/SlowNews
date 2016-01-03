@@ -20,11 +20,10 @@
 }
 
 body {
-    /* background: url("../images/bg.png") #22313f;*/
+   /* background: url("../images/bg.png") #22313f;*/
     background: linear-gradient(to top, ##22313f, #f1da36);
     font: 17px Segoe Ui, Tahoma, sans-serif;
 }
-
 
 a {
     text-decoration: none;
@@ -77,11 +76,12 @@ a {
     display: block;
     font-weight: lighter;
     margin: 2% 22%;
-    font-size: 14px;
+    font-size: 200%;
     font-family: Bender;
     font: BenderRegular;
     overflow: hidden;
     text-overflow: ellipsis;
+    
 }
 
 #content h1 {
@@ -97,10 +97,14 @@ a {
 }
 
 #content ul {
-    list-style: circle;
+    list-style: disc;
     color: #674c47;
     margin-left: 50px;
     margin-top: 10px;
+}
+
+#content ul li {
+
 }
 
 #content a {
@@ -111,10 +115,41 @@ a {
     height: 2.3em;
     line-height: 2.3em;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 600;
-    margin-left: 90%;
+    /*margin-left: 90%;*/
     font-family: Segoe Ui;
+
+}
+
+.top_menu_a {
+    color: #ffffff;
+    margin: 30px 0px 0px 30px;
+    height: 2.7em;
+    line-height: 2.7em;
+    font-family: Bender;
+    font: BenderRegular;
+}
+
+.top_menu_logout_a {
+    height: 2.7em;
+    line-height: 2.7em;
+}
+
+.top_menu_logout_a:hover {
+    text-decoration: underline;
+    height: 2.7em;
+    line-height: 2.7em;
+
+}
+
+.top_menu_a:hover {
+    color: #fffc01;
+    margin: 30px 0px 0px 30px;
+    height: 2.7em;
+    line-height: 2.7em;
+    font-family: Bender;
+    font: BenderRegular;
 }
 
 #content img {
@@ -134,28 +169,11 @@ a {
     height: 5%;
     background: #22313f;
     color: #ffffff;
-    /*  padding-right: 250px;*/
+  /*  padding-right: 250px;*/
     margin-left:5%;
     text-align: center;
 }
 
-#top_menu a {
-    color: #ffffff;
-    margin: 30px 0px 0px 30px;
-    height: 2.7em;
-    line-height: 2.7em;
-    font-family: Bender;
-    font: BenderRegular;
-}
-
-#top_menu a:hover {
-    color: #fffc01;
-    margin: 30px 0px 0px 30px;
-    height: 2.7em;
-    line-height: 2.7em;
-    font-family: Bender;
-    font: BenderRegular;
-}
 
 #left_navigation {
     color: #ddd9d8;
@@ -218,7 +236,6 @@ a {
     line-height: 200%;
     color: #ffffff;
 }
-
 #user_login {
     color:black;
     text-align: right;
@@ -228,7 +245,7 @@ a {
     position:fixed;
     z-index:9999;
     bottom:10px;
-    right: 0px;
+    right:10px;
     background: url('../images/topArrow.png') no-repeat;
     width: 64px;
     height: 64px;

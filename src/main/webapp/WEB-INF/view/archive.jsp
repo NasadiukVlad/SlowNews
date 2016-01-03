@@ -5,7 +5,7 @@
 <head>
     <title>SlowChat</title>
     <meta charset="utf-8">
-    <link href="css/main_pg.css" rel="stylesheet" type="text/css">
+    <link href="css/archive.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -17,8 +17,7 @@
 
             <div id="logo_side_bar">
                 <img src="images/logo.jpg">
-                News, from the last enter:
-                <div id="counter"></div>
+                News, from the last enter: <div id="counter"></div>
             </div>
 
         </a>
@@ -28,9 +27,9 @@
         </div>
 
 
-        <div id="left_content">
+        <%--<div id="left_content">
             <jsp:include page="includeLeftContent.jsp"/>
-        </div>
+        </div>--%>
 
         <div id="left_content2">
             <jsp:include page="includeLeftContent2.jsp"/>
@@ -50,16 +49,13 @@
 
     <div id="content">
 
-        <c:forEach items="${news}" var="element">
-            <td><h2>${element.title}</h2></td>
-            <br>
-            <td>${element.description}</td>
-            <br>
-            <td><a href="${element.link}">More...</a></td>
-            <br>
-            </tr>
-        </c:forEach>
+        Now avaliable archives of next resources:
 
+        <ul>
+            <li><a href="/BBCArchivePageController">BBC World</a></li>
+            <li><a href="/HabrahabrArchivePageController">Habrahabr</a></li>
+            <li><a href="/JavaWorldArchivePageController">Java World</a></li>
+        </ul>
 
     </div>
 

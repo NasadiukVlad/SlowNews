@@ -8,13 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
   <ul>
-
-    <li><a href="index.html">StackOverflow</a></li>
-    <li><a href="index.html">Habrahabr</a></li>
-    <li><a href="index.html">CNet</a></li>
-    <li><a href="index.html">IT Direction</a></li>
-    <li><a href="index.html">The Tech Journal</a></li>
-    <li><a href="index.html">Dou UA</a></li>
-    <li><a href="index.html">Ciol</a></li>
-
+    <li><a href="/IndexPageController">BBC World</a></li>
+    <li><a href="/HabrahabrMainNewsController">Habrahabr</a></li>
+    <li><a href="/JavaWorldNewsController">Java World</a></li>
   </ul>

@@ -25,9 +25,9 @@
             <jsp:include page="includeLeftNavigation.jsp"/>
         </div>
 
-        <div id="left_content">
+       <%-- <div id="left_content">
             <jsp:include page="includeLeftContent.jsp"/>
-        </div>
+        </div>--%>
 
         <div id="left_content2">
             <jsp:include page="includeLeftContent2.jsp"/>
