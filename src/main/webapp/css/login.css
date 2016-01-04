@@ -302,8 +302,14 @@ a {
 }
 
 #user_login {
-    color: black;
+    color: #FFFC00;
+    margin-right: 8%;
     text-align: right;
+    margin-top: -45px;
+}
+#user_login a {
+    color: #FFFC00;
+    text-decoration: underline;
 }
 
 #toTop {

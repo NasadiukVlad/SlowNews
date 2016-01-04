@@ -1,6 +1,7 @@
 package com.slownews.controller;
 
 
+import com.slownews.dao.UsersJpaDao;
 import com.slownews.domain.Users;
 import com.slownews.model.Registrator;
 import com.slownews.model.User;
@@ -34,35 +35,23 @@ public class RegistrationController extends HttpServlet {
         ServletContext context = request.getSession().getServletContext();
         Object obj = context.getAttribute("users");
 
-        if (obj instanceof Map) {
-            users = (Map) obj;
-        }
+
 
         RequestDispatcher rd = null;
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String userEmail = request.getParameter("userEmail");
 
-        Registrator registrator = new Registrator();
+        Users user = new Users(username, password, userEmail);
+        UsersJpaDao usersJpaDao = new UsersJpaDao();
 
-        String userChecker = registrator.register(users, username, password);
+       /* if (usersJpaDao.getByLogin(username) == null) {
 
-        if (userChecker.equals("UserNotExist")) {
-            Users user = new Users();
+        }*/
+        usersJpaDao.addUser(user);
 
-            user.setUsername(username);
-            user.setPassword(password);
-
-            EntityManager entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
-            entityManager.getTransaction().begin();
-            entityManager.persist(user);
-            entityManager.getTransaction().commit();
-            entityManager.close();
-            rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
-
-        } else {
-            rd = request.getRequestDispatcher("WEB-INF/view/registration.jsp");
-        }
+        rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
 
         rd.forward(request, response);
 

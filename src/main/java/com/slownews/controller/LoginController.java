@@ -2,6 +2,8 @@ package com.slownews.controller;
 
 
 
+import com.slownews.dao.UsersJpaDao;
+import com.slownews.domain.Users;
 import com.slownews.model.Authenticator;
 import com.slownews.model.User;
 
@@ -32,28 +34,40 @@ public class LoginController extends HttpServlet {
 
         Map<String, User> users = null;
         ServletContext context = request.getSession().getServletContext();
-        Object obj = context.getAttribute("users");
-        if (obj instanceof Map) {
-            users = (Map) obj;
-        }
 
         RequestDispatcher rd = null;
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Authenticator authenticator = new Authenticator();
+     /*   Authenticator authenticator = new Authenticator();
         String result = authenticator.authenticate(users, username, password);
+*/
 
+        UsersJpaDao usersJpaDao = new UsersJpaDao();
+        Users user = usersJpaDao.getByLogin(username);
 
-        if (result.equals("userCanLogin")) {
+        if(user != null) {
+            if (user.getUsername().equals(username) &&
+                    user.getPassword().equals(password)) {
+                context.setAttribute("username", username);
+                rd = request.getRequestDispatcher("WEB-INF/view/startIndex.jsp");
+            } else if (!user.getUsername().equals(username) ||
+                    !user.getPassword().equals(password)) {
+                context.setAttribute("error", "Login and password not match!");
+                rd = request.getRequestDispatcher("WEB-INF/view/registration.jsp");
+            }
+
+        }
+
+       /* if (result.equals("userCanLogin")) {
          //   context.setAttribute("userLoged", username);
             request.getSession().setAttribute("username", username);
             rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
 
         } else {
             rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
-        }
+        }*/
         rd.forward(request, response);
     }
 

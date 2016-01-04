@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Users {
 
     @Id
-   // @SequenceGenerator(initialValue=1, allocationSize=1, name="users_seq", sequenceName="users_seq")
+    // @SequenceGenerator(initialValue=1, allocationSize=1, name="users_seq", sequenceName="users_seq")
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "username_id")
     private long usernameId;
@@ -22,8 +22,17 @@ public class Users {
     @Column(name = "password")
     private String password;
 
- /*   @Column(name = "userEmail")
-    private String userEmail;*/
+    @Column(name = "userEmail")
+    private String userEmail;
+
+    public Users(String username, String password, String userEmail) {
+        this.username = username;
+        this.password = password;
+        this.userEmail = userEmail;
+    }
+
+    public Users() {
+    }
 
     public long getUsernameId() {
         return usernameId;
@@ -49,12 +58,12 @@ public class Users {
         this.password = password;
     }
 
-   /* public String getUserEmail() {
+    public String getUserEmail() {
         return userEmail;
     }
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }*/
+    }
 
 }
