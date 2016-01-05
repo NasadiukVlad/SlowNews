@@ -23,6 +23,17 @@ public class NewsArchive {
     @Column(name = "description")
     private String description;
 
+    public NewsArchive(String title, String description, String link) {
+        this.title = title;
+        this.description = description;
+        this.link = link;
+
+    }
+
+    public NewsArchive() {
+
+    }
+
     public long getNewsId() {
         return newsId;
     }

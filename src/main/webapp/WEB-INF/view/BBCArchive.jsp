@@ -54,7 +54,7 @@
 
   <div id="content">
 
-    <c:forEach items="${news}" var="element">
+    <c:forEach items="${archiveList}" var="element">
       <td><h2>${element.title}</h2></td>
       <br>
       <td>${element.description}</td>

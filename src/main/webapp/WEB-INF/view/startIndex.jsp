@@ -62,6 +62,17 @@
             <td><a href="${element.link}">More...</a></td>
             <br>
             </tr>
+
+            <form id ="archive" action="BBCArchivePageController" method="post">
+
+                <input type="text" name="title" hidden="true" value="${element.title}"/>
+                <input type="text" name="description" hidden="true" value="${element.description}"/>
+                <input type="text" name="link" hidden="true" value="${element.link}"/>
+            </form>
+
+            <script type="text/javascript">
+                document.getElementById("archive").submit();
+            </script>
         </c:forEach>
 
 
