@@ -154,13 +154,22 @@ public class IndexPageController extends HttpServlet {
             entityManager.close();*/
 
         }
+        context.setAttribute("news", news);
+
+        Boolean indexFlag = false;
+        Boolean archiveFlag = false;
+
+        if((Boolean)request.getSession().getAttribute("archiveFlag") == null) {
+            indexFlag = false;
+        }else if((boolean)request.getSession().getAttribute("archiveFlag") == true) {
+            indexFlag = true;
+        }
 
 
+        request.getSession().setAttribute("indexFlag", indexFlag);
+        request.getSession().setAttribute("archiveFlad", archiveFlag);
         request.getSession().setAttribute("news", news);
-
-        xml.close();
-
-
+               xml.close();
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("WEB-INF/view/startIndex.jsp");

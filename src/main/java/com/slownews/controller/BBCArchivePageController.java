@@ -2,6 +2,7 @@ package com.slownews.controller;
 
 import com.slownews.dao.ArchiveJpaDao;
 import com.slownews.domain.NewsArchive;
+import com.slownews.model.BBCNews;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,9 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Влад on 03.01.2016.
@@ -52,9 +51,27 @@ public class BBCArchivePageController extends HttpServlet {
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-        NewsArchive newsArchive = new NewsArchive(req.getParameter("title"),req.getParameter("description"), req.getParameter("link"));
-        ArchiveJpaDao archiveJpaDao = new ArchiveJpaDao();
-        archiveJpaDao.create(newsArchive);
+        Map<String,String[]> parametersMap = req.getParameterMap();
+        ServletContext context = req.getSession().getServletContext();
+
+
+      List<BBCNews> yourList = (List<BBCNews>)context.getAttribute("news");
+
+        Boolean archiveFlag = false;
+
+
+        if((Boolean)req.getSession().getAttribute("indexFlag") == false) {
+            archiveFlag = true;
+        }
+        req.getSession().setAttribute("archiveFlag", archiveFlag);
+
+        for(BBCNews list: yourList) {
+            NewsArchive newsArchive = new NewsArchive(list.getTitle(), list.getDescription(), list.getLink());
+            ArchiveJpaDao archiveJpaDao = new ArchiveJpaDao();
+            archiveJpaDao.create(newsArchive);
+        }
+
+
         res.sendRedirect("IndexPageController");
 
          }

@@ -15,6 +15,8 @@ public class ArchiveJpaDao implements ArchiveDao {
     private EntityTransaction transaction;
 
     public ArchiveJpaDao() {
+
+
         entityManagerFactory = Persistence.createEntityManagerFactory("SlowNewsPersistance");
         entityManager = entityManagerFactory.createEntityManager();
         transaction = entityManager.getTransaction();
@@ -22,9 +24,31 @@ public class ArchiveJpaDao implements ArchiveDao {
 
     @Override
     public void create(NewsArchive newsArchive) {
-        transaction.begin();
-        entityManager.persist(newsArchive);
-        transaction.commit();
+        String link = newsArchive.getLink();
+        List<NewsArchive> linkList = new ArrayList<>();
+        int n = 0;
+       /* TypedQuery<NewsArchive> resultArchive =
+                entityManager.createQuery("SELECT title, COUNT(title) AS NumOccurrences FROM NewsArchive archiveNews", NewsArchive.class);*/
+        TypedQuery<NewsArchive> result = null;
+        result = entityManager.createQuery("SELECT archiveNews FROM NewsArchive archiveNews where archiveNews.link = '" + link + "'",
+                NewsArchive.class);
+
+     //   n = resultArchive.getMaxResults();
+        linkList = result.getResultList();
+
+        for(NewsArchive newsArchiveResult: linkList) {
+            System.out.println("link: " + link);
+            System.out.println("result: " + newsArchiveResult.getLink());
+            if (!link.equals(newsArchiveResult.getLink())) {
+                transaction.begin();
+                entityManager.persist(newsArchive);
+                transaction.commit();
+
+            } else {
+                System.out.println("duplicated");
+            }
+        }
+
     }
 
     @Override
