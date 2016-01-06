@@ -127,7 +127,7 @@ public class JavaWorldNewsController extends HttpServlet {
         links = javaWorldNewsXPathMap.getLinks();
         descriptions = javaWorldNewsXPathMap.getDescriptions();
 
-        List<JavaWorldNews> news = new LinkedList<>();
+        List<JavaWorldNews> javaWorldNews = new LinkedList<>();
 
 
         for (int i = 0; i < titles.size(); i++) {
@@ -148,7 +148,7 @@ public class JavaWorldNewsController extends HttpServlet {
             }
 
             JavaWorldNews newsItem = new JavaWorldNews(title, sb.toString(), link);
-            news.add(newsItem);
+            javaWorldNews.add(newsItem);
 
             NewsArchive newsArchive = new NewsArchive();
 
@@ -156,16 +156,23 @@ public class JavaWorldNewsController extends HttpServlet {
             newsArchive.setDescription(description);
             newsArchive.setLink(link);
 
-          /*  EntityManager entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
-            entityManager.getTransaction().begin();
-            entityManager.persist(newsArchive);
-            entityManager.getTransaction().commit();
-            entityManager.close();*/
+        }
 
+        context.setAttribute("javaWorldNews", javaWorldNews);
+
+        Boolean indexFlag = false;
+        Boolean archiveFlag = false;
+
+        if((Boolean)request.getSession().getAttribute("javaWorldArchiveFlag") == null) {
+            indexFlag = false;
+        }else if((boolean)request.getSession().getAttribute("javaWorldArchiveFlag") == true) {
+            indexFlag = true;
         }
 
 
-        request.getSession().setAttribute("news", news);
+        request.getSession().setAttribute("javaWorldIndexFlag", indexFlag);
+        request.getSession().setAttribute("javaWorldArchiveFlag", archiveFlag);
+        request.getSession().setAttribute("javaWorldNews", javaWorldNews);
 
         xml.close();
 

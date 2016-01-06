@@ -127,7 +127,7 @@ public class HabrahabrMainNewsController extends HttpServlet {
         links = habrahabrXpathMap.getLinks();
         descriptions = habrahabrXpathMap.getDescriptions();
 
-        List<HabrahabrNews> news = new LinkedList<>();
+        List<HabrahabrNews> habrahabrNews = new LinkedList<>();
 
         for (int i = 0; i < titles.size(); i++) {
             String title = titles.get(i).toString();
@@ -146,7 +146,7 @@ public class HabrahabrMainNewsController extends HttpServlet {
             String link = links.get(i).toString();
 
             HabrahabrNews newsItem = new HabrahabrNews(title, sb.toString(), link);
-            news.add(newsItem);
+            habrahabrNews.add(newsItem);
 
             NewsArchive newsArchive = new NewsArchive();
 
@@ -161,8 +161,21 @@ public class HabrahabrMainNewsController extends HttpServlet {
             entityManager.close();*/
 
         }
+        context.setAttribute("habrahabrNews", habrahabrNews);
 
-        request.getSession().setAttribute("news", news);
+        Boolean indexFlag = false;
+        Boolean archiveFlag = false;
+
+        if((Boolean)request.getSession().getAttribute("habrahabrArchiveFlag") == null) {
+            indexFlag = false;
+        }else if((boolean)request.getSession().getAttribute("habrahabrArchiveFlag") == true) {
+            indexFlag = true;
+        }
+
+
+        request.getSession().setAttribute("habrahabrIndexFlag", indexFlag);
+        request.getSession().setAttribute("habrahabrArchiveFlag", archiveFlag);
+        request.getSession().setAttribute("habrahabrNews", habrahabrNews);
 
         xml.close();
 

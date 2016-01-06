@@ -167,7 +167,7 @@ public class IndexPageController extends HttpServlet {
 
 
         request.getSession().setAttribute("indexFlag", indexFlag);
-        request.getSession().setAttribute("archiveFlad", archiveFlag);
+        request.getSession().setAttribute("archiveFlag", archiveFlag);
         request.getSession().setAttribute("news", news);
                xml.close();
 

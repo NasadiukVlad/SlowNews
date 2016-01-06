@@ -8,6 +8,8 @@
 
         <class>com.slownews.domain.Users</class>
         <class>com.slownews.domain.NewsArchive</class>
+        <class>com.slownews.domain.HabrahabrNewsArchive</class>
+        <class>com.slownews.domain.JavaWorldNewsArchive</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/SlowNews" />

@@ -56,7 +56,7 @@
 
     <div id="content">
 
-        <c:forEach items="${news}" var="element">
+        <c:forEach items="${habrahabrNews}" var="element">
             <td><h2>${element.title}</h2></td>
             <br>
             <td>${element.description}</td>
@@ -65,18 +65,23 @@
             <br>
             </tr>
 
+
+        </c:forEach>
+
+        <c:if test = "${not habrahabrIndexFlag}">
             <form id ="archive" action="HabrahabrArchivePageController" method="post">
 
-                <input type="text" name="title" hidden="true" value="${element.title}"/>
-                <input type="text" name="description" hidden="true" value="${element.description}"/>
-                <input type="text" name="link" hidden="true" value="${element.link}"/>
+                <input type="text" name="habrahabrNews" hidden="true" value="${habrahabrNews}"/>
+                    <%-- <input type="text" name="title" hidden="true" value="${element.title}"/>
+                     <input type="text" name="description" hidden="true" value="${element.description}"/>
+                     <input type="text" name="link" hidden="true" value="${element.link}"/>--%>
             </form>
+
 
             <script type="text/javascript">
                 document.getElementById("archive").submit();
             </script>
-
-        </c:forEach>
+        </c:if>
 
     </div>
     <a href="#" id="toTop">TOP!</a>
