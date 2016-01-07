@@ -23,11 +23,11 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
 
     @Override
     public void create(JavaWorldNewsArchive javaWorldNewsArchive) {
-        String link = javaWorldNewsArchive.getLink();
+       /* String link = javaWorldNewsArchive.getLink();
         List<JavaWorldNewsArchive> linkList = new ArrayList<>();
         int n = 0;
-       /* TypedQuery<NewsArchive> resultArchive =
-                entityManager.createQuery("SELECT title, COUNT(title) AS NumOccurrences FROM NewsArchive archiveNews", NewsArchive.class);*/
+       *//* TypedQuery<NewsArchive> resultArchive =
+                entityManager.createQuery("SELECT title, COUNT(title) AS NumOccurrences FROM NewsArchive archiveNews", NewsArchive.class);*//*
         TypedQuery<JavaWorldNewsArchive> result = null;
         result = entityManager.createQuery("SELECT javaWorldNewsArchive FROM JavaWorldNewsArchive javaWorldNewsArchive where javaWorldNewsArchive.link = '" + link + "'",
                 JavaWorldNewsArchive.class);
@@ -46,8 +46,49 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
        //     } else {
                 System.out.println("duplicated");
       //      }
-     //   }
+     //   }*/
+        String link = javaWorldNewsArchive.getLink();
+        List<JavaWorldNewsArchive> linkList = new ArrayList<>();
+        int n = 0;
+       /* TypedQuery<NewsArchive> resultArchive =
+                entityManager.createQuery("SELECT title, COUNT(title) AS NumOccurrences FROM NewsArchive archiveNews", NewsArchive.class);*/
+        TypedQuery<JavaWorldNewsArchive> result = null;
+        result = entityManager.createQuery("SELECT javaWorldNewsArchive FROM JavaWorldNewsArchive javaWorldNewsArchive",
+                JavaWorldNewsArchive.class);
 
+        //   n = resultArchive.getMaxResults();
+        linkList = result.getResultList();
+
+        boolean isExist = false;
+        for (JavaWorldNewsArchive newsArchiveResult : linkList) {
+            String resultString = newsArchiveResult.getLink();
+            if(link.equals(resultString)) {
+                isExist = true;
+            }
+           /* System.out.println("link: " + link);
+
+            System.out.println("ResultString:" + resultString);
+            System.out.println("result: " + newsArchiveResult.getLink());
+            if (!link.equals(resultString)) {
+                transaction.begin();
+                entityManager.persist(newsArchive);
+                transaction.commit();
+                System.out.println("added");
+
+            } else {
+                System.out.println("duplicated");
+            }*/
+        }
+
+        if (!isExist) {
+            transaction.begin();
+            entityManager.persist(javaWorldNewsArchive);
+            transaction.commit();
+            System.out.println("added");
+
+        } else {
+            System.out.println("Duplicate");
+        }
     }
 
     @Override

@@ -43,12 +43,21 @@ public class UsersJpaDao implements UsersDao {
     public Users getByLogin(String username) {
         List<Users> allUsersList = new ArrayList<>();
 
-            transaction.begin();
-            TypedQuery <Users> result =
-                    entityManager.createQuery("SELECT users FROM Users users where username = '" + username + "'",
-                            Users.class);
-            transaction.commit();
+        transaction.begin();
+        TypedQuery<Users> result =
+                entityManager.createQuery("SELECT users FROM Users users where users.username = '" + username + "'",
+                        Users.class);
+        transaction.commit();
+
         allUsersList = result.getResultList();
-        return allUsersList.get(0);
+
+       if (allUsersList.isEmpty()) {
+            return null;
+        } else {
+            return allUsersList.get(0);
+        }
+
     }
 }
+
+

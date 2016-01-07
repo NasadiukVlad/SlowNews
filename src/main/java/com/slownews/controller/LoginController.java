@@ -1,7 +1,6 @@
 package com.slownews.controller;
 
 
-
 import com.slownews.dao.UsersJpaDao;
 import com.slownews.domain.Users;
 import com.slownews.model.Authenticator;
@@ -23,10 +22,9 @@ import java.util.UUID;
 
 public class LoginController extends HttpServlet {
 
-       public LoginController() {
+    public LoginController() {
         super();
     }
-
 
 
     protected void doPost(HttpServletRequest request,
@@ -47,7 +45,7 @@ public class LoginController extends HttpServlet {
         UsersJpaDao usersJpaDao = new UsersJpaDao();
         Users user = usersJpaDao.getByLogin(username);
 
-        if(user != null) {
+        if (user != null) {
             if (user.getUsername().equals(username) &&
                     user.getPassword().equals(password)) {
                 context.setAttribute("username", username);
@@ -57,8 +55,10 @@ public class LoginController extends HttpServlet {
                 context.setAttribute("error", "Login and password not match!");
                 rd = request.getRequestDispatcher("WEB-INF/view/registration.jsp");
             }
+        } else {
+            rd = request.getRequestDispatcher("WEB-INF/view/registration.jsp");
 
-        }
+    }
 
        /* if (result.equals("userCanLogin")) {
          //   context.setAttribute("userLoged", username);
@@ -68,8 +68,8 @@ public class LoginController extends HttpServlet {
         } else {
             rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
         }*/
-        rd.forward(request, response);
-    }
+    rd.forward(request,response);
+}
 
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
