@@ -16,8 +16,6 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
     private EntityTransaction transaction;
 
     public JavaWorldArchiveJpaDao() {
-
-
         entityManagerFactory = Persistence.createEntityManagerFactory("SlowNewsPersistance");
         entityManager = entityManagerFactory.createEntityManager();
         transaction = entityManager.getTransaction();
@@ -37,18 +35,18 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
         //   n = resultArchive.getMaxResults();
         linkList = result.getResultList();
 
-        for(JavaWorldNewsArchive javaWorldNewsArchiveResult: linkList) {
+    //    for(JavaWorldNewsArchive javaWorldNewsArchiveResult: linkList) {
             System.out.println("link: " + link);
-            System.out.println("result: " + javaWorldNewsArchiveResult.getLink());
-            if (!link.equals(javaWorldNewsArchiveResult.getLink())) {
+      //      System.out.println("result: " + javaWorldNewsArchiveResult.getLink());
+       //     if (!link.equals(javaWorldNewsArchiveResult.getLink())) {
                 transaction.begin();
                 entityManager.persist(javaWorldNewsArchive);
                 transaction.commit();
 
-            } else {
+       //     } else {
                 System.out.println("duplicated");
-            }
-        }
+      //      }
+     //   }
 
     }
 

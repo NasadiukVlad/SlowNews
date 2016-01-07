@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 
 <html>
@@ -33,10 +33,10 @@
             <jsp:include page="includeLeftNavigation.jsp"/>
         </div>
 
-<%--
-        <div id="left_content">
-            <jsp:include page="includeLeftContent.jsp"/>
-        </div>--%>
+        <%--
+                <div id="left_content">
+                    <jsp:include page="includeLeftContent.jsp"/>
+                </div>--%>
 
         <div id="left_content2">
             <jsp:include page="includeLeftContent2.jsp"/>
@@ -65,11 +65,10 @@
             <br>
             </tr>
 
-
         </c:forEach>
 
-        <c:if test = "${not habrahabrIndexFlag}">
-            <form id ="archive" action="HabrahabrArchivePageController" method="post">
+        <c:if test="${not habrahabrIndexFlag}">
+            <form id="archive" action="HabrahabrArchivePageController" method="post">
 
                 <input type="text" name="habrahabrNews" hidden="true" value="${habrahabrNews}"/>
                     <%-- <input type="text" name="title" hidden="true" value="${element.title}"/>

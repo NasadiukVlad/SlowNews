@@ -16,8 +16,6 @@ public class HabrahabrArchiveJpaDao implements HabrahabrArchiveDao {
     private EntityTransaction transaction;
 
     public HabrahabrArchiveJpaDao() {
-
-
         entityManagerFactory = Persistence.createEntityManagerFactory("SlowNewsPersistance");
         entityManager = entityManagerFactory.createEntityManager();
         transaction = entityManager.getTransaction();
@@ -37,13 +35,14 @@ public class HabrahabrArchiveJpaDao implements HabrahabrArchiveDao {
         //   n = resultArchive.getMaxResults();
         linkList = result.getResultList();
 
-        for(HabrahabrNewsArchive habrahabrNewsArchiveResult: linkList) {
+       for(HabrahabrNewsArchive habrahabrNewsArchiveResult: linkList) {
             System.out.println("link: " + link);
             System.out.println("result: " + habrahabrNewsArchiveResult.getLink());
             if (!link.equals(habrahabrNewsArchiveResult.getLink())) {
                 transaction.begin();
                 entityManager.persist(habrahabrNewsArchive);
                 transaction.commit();
+
 
             } else {
                 System.out.println("duplicated");

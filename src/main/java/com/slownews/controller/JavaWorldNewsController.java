@@ -165,9 +165,14 @@ public class JavaWorldNewsController extends HttpServlet {
 
         if((Boolean)request.getSession().getAttribute("javaWorldArchiveFlag") == null) {
             indexFlag = false;
-        }else if((boolean)request.getSession().getAttribute("javaWorldArchiveFlag") == true) {
+        } else {
             indexFlag = true;
         }
+        /*if((Boolean)request.getSession().getAttribute("archiveFlag") == true) {
+           indexFlag = true;
+        }*/
+
+        context.setAttribute("indexFlag", indexFlag);
 
 
         request.getSession().setAttribute("javaWorldIndexFlag", indexFlag);

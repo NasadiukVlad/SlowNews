@@ -21,8 +21,9 @@
         <a href="IndexPageController">
 
             <div id="logo_side_bar">
-               <img src="images/logo.jpg">
-                News, from the last enter: <div id="counter"></div>
+                <img src="images/logo.jpg">
+                News, from the last enter:
+                <div id="counter"></div>
             </div>
 
         </a>
@@ -65,19 +66,19 @@
 
         </c:forEach>
 
-        <c:if test = "${not indexFlag}">
-        <form id ="archive" action="BBCArchivePageController" method="post">
+        <c:if test="${not indexFlag}">
+            <form id="archive" action="BBCArchivePageController" method="post">
 
-            <input type="text" name="news" hidden="true" value="${news}"/>
-           <%-- <input type="text" name="title" hidden="true" value="${element.title}"/>
-            <input type="text" name="description" hidden="true" value="${element.description}"/>
-            <input type="text" name="link" hidden="true" value="${element.link}"/>--%>
-        </form>
+                <input type="text" name="news" hidden="true" value="${news}"/>
+                    <%-- <input type="text" name="title" hidden="true" value="${element.title}"/>
+                     <input type="text" name="description" hidden="true" value="${element.description}"/>
+                     <input type="text" name="link" hidden="true" value="${element.link}"/>--%>
+            </form>
 
 
-        <script type="text/javascript">
-            document.getElementById("archive").submit();
-        </script>
+            <script type="text/javascript">
+                document.getElementById("archive").submit();
+            </script>
         </c:if>
     </div>
 

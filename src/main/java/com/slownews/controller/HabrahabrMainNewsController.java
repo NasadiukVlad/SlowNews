@@ -168,9 +168,14 @@ public class HabrahabrMainNewsController extends HttpServlet {
 
         if((Boolean)request.getSession().getAttribute("habrahabrArchiveFlag") == null) {
             indexFlag = false;
-        }else if((boolean)request.getSession().getAttribute("habrahabrArchiveFlag") == true) {
+        } else {
             indexFlag = true;
         }
+        /*if((Boolean)request.getSession().getAttribute("archiveFlag") == true) {
+           indexFlag = true;
+        }*/
+
+        context.setAttribute("indexFlag", indexFlag);
 
 
         request.getSession().setAttribute("habrahabrIndexFlag", indexFlag);

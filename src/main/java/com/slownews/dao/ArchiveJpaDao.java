@@ -1,5 +1,6 @@
 package com.slownews.dao;
 
+import com.slownews.domain.HabrahabrNewsArchive;
 import com.slownews.domain.NewsArchive;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Влад on 03.01.2016.
+ * Created by Влад on 06.01.2016.
  */
 public class ArchiveJpaDao implements ArchiveDao {
     private EntityManagerFactory entityManagerFactory;
@@ -15,8 +16,6 @@ public class ArchiveJpaDao implements ArchiveDao {
     private EntityTransaction transaction;
 
     public ArchiveJpaDao() {
-
-
         entityManagerFactory = Persistence.createEntityManagerFactory("SlowNewsPersistance");
         entityManager = entityManagerFactory.createEntityManager();
         transaction = entityManager.getTransaction();
@@ -30,10 +29,10 @@ public class ArchiveJpaDao implements ArchiveDao {
        /* TypedQuery<NewsArchive> resultArchive =
                 entityManager.createQuery("SELECT title, COUNT(title) AS NumOccurrences FROM NewsArchive archiveNews", NewsArchive.class);*/
         TypedQuery<NewsArchive> result = null;
-        result = entityManager.createQuery("SELECT archiveNews FROM NewsArchive archiveNews where archiveNews.link = '" + link + "'",
+        result = entityManager.createQuery("SELECT newsArchive FROM NewsArchive newsArchive where newsArchive.link = '" + link + "'",
                 NewsArchive.class);
 
-     //   n = resultArchive.getMaxResults();
+        //   n = resultArchive.getMaxResults();
         linkList = result.getResultList();
 
         for(NewsArchive newsArchiveResult: linkList) {
@@ -43,6 +42,7 @@ public class ArchiveJpaDao implements ArchiveDao {
                 transaction.begin();
                 entityManager.persist(newsArchive);
                 transaction.commit();
+                System.out.println("added");
 
             } else {
                 System.out.println("duplicated");
@@ -57,7 +57,7 @@ public class ArchiveJpaDao implements ArchiveDao {
 
         transaction.begin();
         TypedQuery<NewsArchive> resultArchive =
-                entityManager.createQuery("SELECT archiveNews FROM NewsArchive archiveNews", NewsArchive.class);
+                entityManager.createQuery("SELECT newsArchive FROM NewsArchive newsArchive", NewsArchive.class);
         transaction.commit();
         archiveListResult = resultArchive.getResultList();
         return archiveListResult;

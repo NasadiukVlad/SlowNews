@@ -161,10 +161,14 @@ public class IndexPageController extends HttpServlet {
 
         if((Boolean)request.getSession().getAttribute("archiveFlag") == null) {
             indexFlag = false;
-        }else if((boolean)request.getSession().getAttribute("archiveFlag") == true) {
+        } else {
             indexFlag = true;
         }
+        /*if((Boolean)request.getSession().getAttribute("archiveFlag") == true) {
+           indexFlag = true;
+        }*/
 
+        context.setAttribute("indexFlag", indexFlag);
 
         request.getSession().setAttribute("indexFlag", indexFlag);
         request.getSession().setAttribute("archiveFlag", archiveFlag);

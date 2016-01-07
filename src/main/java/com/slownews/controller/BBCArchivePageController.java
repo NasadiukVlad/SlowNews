@@ -51,21 +51,22 @@ public class BBCArchivePageController extends HttpServlet {
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-        Map<String,String[]> parametersMap = req.getParameterMap();
+        Map<String, String[]> parametersMap = req.getParameterMap();
         ServletContext context = req.getSession().getServletContext();
 
 
-      List<BBCNews> yourList = (List<BBCNews>)context.getAttribute("news");
+        List<BBCNews> yourList = (List<BBCNews>) context.getAttribute("news");
 
         Boolean archiveFlag = false;
 
 
-        if((Boolean)req.getSession().getAttribute("indexFlag") == false) {
+        if ((Boolean) req.getSession().getAttribute("indexFlag") == false) {
             archiveFlag = true;
         }
+
         req.getSession().setAttribute("archiveFlag", archiveFlag);
 
-        for(BBCNews list: yourList) {
+        for (BBCNews list : yourList) {
             NewsArchive newsArchive = new NewsArchive(list.getTitle(), list.getDescription(), list.getLink());
             ArchiveJpaDao archiveJpaDao = new ArchiveJpaDao();
             archiveJpaDao.create(newsArchive);
@@ -74,5 +75,5 @@ public class BBCArchivePageController extends HttpServlet {
 
         res.sendRedirect("IndexPageController");
 
-         }
+    }
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 
 <html>
@@ -54,7 +55,7 @@
 
   <div id="content">
 
-    <c:forEach items="${archiveList}" var="element">
+    <c:forEach items="${habrahabrArchiveNewsList}" var="element">
       <td><h2>${element.title}</h2></td>
       <br>
       <td>${element.description}</td>

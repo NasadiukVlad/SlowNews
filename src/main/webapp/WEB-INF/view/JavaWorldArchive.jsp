@@ -54,7 +54,7 @@
 
   <div id="content">
 
-    <c:forEach items="${javaWorldNews}" var="element">
+    <c:forEach items="${javaWorldArchiveNewsList}" var="element">
       <td><h2>${element.title}</h2></td>
       <br>
       <td>${element.description}</td>
@@ -63,21 +63,21 @@
       <br>
       </tr>
     </c:forEach>
-
+<%--
     <c:if test = "${not javaWorldIndexFlag}">
       <form id ="archive" action="JavaWorldArchivePageController" method="post">
 
         <input type="text" name="javaWorldNews" hidden="true" value="${javaWorldNews}"/>
-          <%-- <input type="text" name="title" hidden="true" value="${element.title}"/>
+          &lt;%&ndash; <input type="text" name="title" hidden="true" value="${element.title}"/>
            <input type="text" name="description" hidden="true" value="${element.description}"/>
-           <input type="text" name="link" hidden="true" value="${element.link}"/>--%>
+           <input type="text" name="link" hidden="true" value="${element.link}"/>&ndash;%&gt;
       </form>
 
 
       <script type="text/javascript">
         document.getElementById("archive").submit();
       </script>
-    </c:if>
+    </c:if>--%>
 
 
   </div>
