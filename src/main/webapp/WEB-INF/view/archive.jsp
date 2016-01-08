@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>SlowChat</title>
+    <title>SlowNews</title>
     <meta charset="utf-8">
     <link href="css/archive.css" rel="stylesheet" type="text/css">
 </head>
@@ -12,7 +12,6 @@
 <div id="page_align">
 
     <div id="sidebar">
-
         <a href="IndexPageController">
 
             <div id="logo_side_bar">
@@ -26,20 +25,14 @@
             <jsp:include page="includeLeftNavigation.jsp"/>
         </div>
 
-
-        <%--<div id="left_content">
-            <jsp:include page="includeLeftContent.jsp"/>
-        </div>--%>
-
         <div id="left_content2">
-            <jsp:include page="includeLeftContent2.jsp"/>
-
+            <jsp:include page="includeWeatherForecast.jsp"/>
         </div>
 
     </div>
 
     <div id="top_menu">
-        <jsp:include page="includeMenu.jsp"/>
+        <jsp:include page="includeTopMenu.jsp"/>
         <c:if test="${not empty username}">
             <div id="user_login">
                 Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
@@ -59,9 +52,7 @@
 
     </div>
 
-
 </div>
-
 
 <div id="clr"></div>
 </div>

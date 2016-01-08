@@ -31,55 +31,51 @@
             <jsp:include page="includeLeftNavigation.jsp"/>
         </div>
 
-        <%--<div id="left_content">
-            <jsp:include page="includeLeftContent.jsp"/>
-        </div>--%>
-
         <div id="left_content2">
-            <jsp:include page="includeLeftContent2.jsp"/>
+            <jsp:include page="includeWeatherForecast.jsp"/>
         </div>
 
     </div>
 
     <div id="top_menu">
-        <jsp:include page="includeMenu.jsp"/>
+
+        <jsp:include page="includeTopMenu.jsp"/>
+
         <c:if test="${not empty username}">
             <div id="user_login">
                 Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
             </div>
         </c:if>
-    </div>
 
+    </div>
 
     <div id="content">
 
-
-    <div id="login">
+        <div id="login">
             <h1 class="h1">Registration form</h1>
 
 
             <form action="RegistrationController" method="post" class="login_form">
                 <br>
+
                 <p class="login_p">Enter your name: </p>
                 <br>
                 <input type="text" name="username" class="login_form_input">
                 <br>
+
                 <p class="login_p">Enter your password: </p>
                 <br>
-                <input type="password" name = "password" class="login_form_input">
+                <input type="password" name="password" class="login_form_input">
                 <br>
-                <input type="submit" value = "Register" name="button" class = "button">
+                <input type="submit" value="Register" name="button" class="button">
 
             </form>
-
 
         </div>
 
     </div>
 
-
 </div>
-
 
 <div id="clr"></div>
 </div>

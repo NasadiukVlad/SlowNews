@@ -1,92 +1,84 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 
 <html>
 
 <head>
-  <title>SlowChat</title>
-  <meta charset="utf-8">
-  <link href="css/main_pg.css" rel="stylesheet" type="text/css">
-  <script type="text/javascript" src="js/jsCounter.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/scrollOnTop.js"></script>
+    <title>SlowNews</title>
+    <meta charset="utf-8">
+    <link href="css/main_pg.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jsCounter.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/scrollOnTop.js"></script>
 </head>
 
 <body>
 <div id="page_align">
 
-  <div id="sidebar">
+    <div id="sidebar">
 
-    <a href="IndexPageController">
+        <a href="IndexPageController">
 
-      <div id="logo_side_bar">
-        <img src="images/logo.jpg">
-        News, from the last enter:
-        <div id="counter"></div>
-        Latest topic:
-      </div>
+            <div id="logo_side_bar">
+                <img src="images/logo.jpg">
+                News, from the last enter:
+                <div id="counter"></div>
+                Latest topic:
+            </div>
 
-    </a>
+        </a>
 
-    <div id="left_navigation">
-      <jsp:include page="includeLeftNavigation.jsp"/>
-    </div>
+        <div id="left_navigation">
+            <jsp:include page="includeLeftNavigation.jsp"/>
+        </div>
 
-    <%--
-            <div id="left_content">
-                <jsp:include page="includeLeftContent.jsp"/>
-            </div>--%>
-
-    <div id="left_content2">
-      <jsp:include page="includeLeftContent2.jsp"/>
+        <div id="left_content2">
+            <jsp:include page="includeWeatherForecast.jsp"/>
+        </div>
 
     </div>
 
-  </div>
+    <div id="top_menu">
 
-  <div id="top_menu">
-    <jsp:include page="includeMenu.jsp"/>
-    <c:if test="${not empty username}">
-      <div id="user_login">
-        Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
-      </div>
-    </c:if>
-  </div>
+        <jsp:include page="includeTopMenu.jsp"/>
 
-  <div id="content">
+        <c:if test="${not empty username}">
+            <div id="user_login">
+                Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
+            </div>
+        </c:if>
 
-    <c:forEach items="${javaNews}" var="element">
-      <td><h2>${element.title}</h2></td>
-      <br>
-      <td>${element.description}</td>
-      <br>
-      <td><a href="${element.link}">More...</a></td>
-      <br>
-      </tr>
-    </c:forEach>
+    </div>
 
-    <c:if test = "${not javaWorldIndexFlag}">
-      <form id ="archive" action="JavaWorldArchivePageController" method="post">
+    <div id="content">
 
-        <input type="text" name="javaWorldNews" hidden="true" value="${javaWorldNews}"/>
-          <%-- <input type="text" name="title" hidden="true" value="${element.title}"/>
-           <input type="text" name="description" hidden="true" value="${element.description}"/>
-           <input type="text" name="link" hidden="true" value="${element.link}"/>--%>
-      </form>
+        <c:forEach items="${javaNews}" var="element">
+            <td><h2>${element.title}</h2></td>
+            <br>
+            <td>${element.description}</td>
+            <br>
+            <td><a href="${element.link}">More...</a></td>
+            <br>
+            </tr>
+        </c:forEach>
 
+        <c:if test="${not javaWorldIndexFlag}">
 
-      <script type="text/javascript">
-        document.getElementById("archive").submit();
-      </script>
-    </c:if>
+            <form id="archive" action="JavaWorldArchivePageController" method="post">
+                <input type="text" name="javaWorldNews" hidden="true" value="${javaWorldNews}"/>
+            </form>
 
+            <script type="text/javascript">
+                document.getElementById("archive").submit();
+            </script>
 
-  </div>
-  <a href="#" id="toTop">TOP!</a>
+        </c:if>
+
+    </div>
+    <a href="#" id="toTop">TOP!</a>
 
 </div>
-
 
 <div id="clr"></div>
 </div>

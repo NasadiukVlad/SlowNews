@@ -4,87 +4,68 @@
 <html>
 
 <head>
-  <title>SlowNews</title>
-  <meta charset="utf-8">
-  <link href="css/main_pg.css" rel="stylesheet" type="text/css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/jsCounter.js"></script>
-  <script type="text/javascript" src="js/scrollOnTop.js"></script>
+    <title>SlowNews</title>
+    <meta charset="utf-8">
+    <link href="css/main_pg.css" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jsCounter.js"></script>
+    <script type="text/javascript" src="js/scrollOnTop.js"></script>
 
 </head>
 
 <body>
 <div id="page_align">
 
-  <div id="sidebar">
+    <div id="sidebar">
 
-    <a href="IndexPageController">
+        <a href="IndexPageController">
 
-      <div id="logo_side_bar">
-        <img src="images/logo.jpg">
-        News, from the last enter: <div id="counter"></div>
-      </div>
+            <div id="logo_side_bar">
+                <img src="images/logo.jpg">
+                News, from the last enter:
+                <div id="counter"></div>
+            </div>
 
-    </a>
+        </a>
 
-    <div id="left_navigation">
-      <jsp:include page="includeLeftNavigation.jsp"/>
-    </div>
+        <div id="left_navigation">
+            <jsp:include page="includeLeftNavigation.jsp"/>
+        </div>
 
-
-    <%--<div id="left_content">
-        <jsp:include page="includeLeftContent.jsp"/>
-    </div>--%>
-
-    <div id="left_content2">
-      <jsp:include page="includeLeftContent2.jsp"/>
+        <div id="left_content2">
+            <jsp:include page="includeWeatherForecast.jsp"/>
+        </div>
 
     </div>
 
-  </div>
+    <div id="top_menu">
 
-  <div id="top_menu">
-    <jsp:include page="includeMenu.jsp"/>
-    <c:if test="${not empty username}">
-      <div id="user_login">
-        Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
-      </div>
-    </c:if>
-  </div>
+        <jsp:include page="includeTopMenu.jsp"/>
 
-  <div id="content">
+        <c:if test="${not empty username}">
+            <div id="user_login">
+                Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
+            </div>
+        </c:if>
 
-    <c:forEach items="${javaWorldArchiveNewsList}" var="element">
-      <td><h2>${element.title}</h2></td>
-      <br>
-      <td>${element.description}</td>
-      <br>
-      <td><a href="${element.link}">More...</a></td>
-      <br>
-      </tr>
-    </c:forEach>
-<%--
-    <c:if test = "${not javaWorldIndexFlag}">
-      <form id ="archive" action="JavaWorldArchivePageController" method="post">
+    </div>
 
-        <input type="text" name="javaWorldNews" hidden="true" value="${javaWorldNews}"/>
-          &lt;%&ndash; <input type="text" name="title" hidden="true" value="${element.title}"/>
-           <input type="text" name="description" hidden="true" value="${element.description}"/>
-           <input type="text" name="link" hidden="true" value="${element.link}"/>&ndash;%&gt;
-      </form>
+    <div id="content">
 
+        <c:forEach items="${javaWorldArchiveNewsList}" var="element">
+            <td><h2>${element.title}</h2></td>
+            <br>
+            <td>${element.description}</td>
+            <br>
+            <td><a href="${element.link}">More...</a></td>
+            <br>
+            </tr>
+        </c:forEach>
 
-      <script type="text/javascript">
-        document.getElementById("archive").submit();
-      </script>
-    </c:if>--%>
+    </div>
 
-
-  </div>
-
-  <a href="#" id="toTop">TOP!</a>
+    <a href="#" id="toTop">TOP!</a>
 </div>
-
 
 <div id="clr"></div>
 </div>

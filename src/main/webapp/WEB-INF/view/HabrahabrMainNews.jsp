@@ -33,25 +33,22 @@
             <jsp:include page="includeLeftNavigation.jsp"/>
         </div>
 
-        <%--
-                <div id="left_content">
-                    <jsp:include page="includeLeftContent.jsp"/>
-                </div>--%>
-
         <div id="left_content2">
-            <jsp:include page="includeLeftContent2.jsp"/>
-
+            <jsp:include page="includeWeatherForecast.jsp"/>
         </div>
 
     </div>
 
     <div id="top_menu">
-        <jsp:include page="includeMenu.jsp"/>
+
+        <jsp:include page="includeTopMenu.jsp"/>
+
         <c:if test="${not empty username}">
             <div id="user_login">
                 Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
             </div>
         </c:if>
+
     </div>
 
     <div id="content">
@@ -64,18 +61,13 @@
             <td><a href="${element.link}">More...</a></td>
             <br>
             </tr>
-
         </c:forEach>
 
         <c:if test="${not habrahabrIndexFlag}">
+
             <form id="archive" action="HabrahabrArchivePageController" method="post">
-
                 <input type="text" name="habrahabrNews" hidden="true" value="${habrahabrNews}"/>
-                    <%-- <input type="text" name="title" hidden="true" value="${element.title}"/>
-                     <input type="text" name="description" hidden="true" value="${element.description}"/>
-                     <input type="text" name="link" hidden="true" value="${element.link}"/>--%>
             </form>
-
 
             <script type="text/javascript">
                 document.getElementById("archive").submit();
@@ -86,7 +78,6 @@
     <a href="#" id="toTop">TOP!</a>
 
 </div>
-
 
 <div id="clr"></div>
 </div>

@@ -54,7 +54,9 @@ public class BBCArchivePageController extends HttpServlet {
         for (BBCNews list : yourList) {
             NewsArchive newsArchive = new NewsArchive(list.getTitle(), list.getDescription(), list.getLink());
             ArchiveJpaDao archiveJpaDao = new ArchiveJpaDao();
-            archiveJpaDao.create(newsArchive);
+            if (archiveJpaDao.create(newsArchive).equals("duplicate")) {
+                break;
+            }
         }
 
         res.sendRedirect("IndexPageController");

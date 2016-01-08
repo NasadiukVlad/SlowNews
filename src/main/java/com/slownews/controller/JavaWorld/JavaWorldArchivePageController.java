@@ -54,7 +54,9 @@ public class JavaWorldArchivePageController extends HttpServlet {
         for (JavaWorldNews list : yourList) {
             JavaWorldNewsArchive javaWorldNewsArchive = new JavaWorldNewsArchive(list.getTitle(), list.getDescription(), list.getLink());
             JavaWorldArchiveJpaDao javaWorldArchiveJpaDao = new JavaWorldArchiveJpaDao();
-            javaWorldArchiveJpaDao.create(javaWorldNewsArchive);
+            if (javaWorldArchiveJpaDao.create(javaWorldNewsArchive).equals("duplicate")) {
+                break;
+            }
         }
 
         res.sendRedirect("JavaWorldNewsController");

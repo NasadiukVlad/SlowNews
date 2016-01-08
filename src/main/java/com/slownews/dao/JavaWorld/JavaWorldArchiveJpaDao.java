@@ -22,7 +22,7 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
     }
 
     @Override
-    public void create(JavaWorldNewsArchive javaWorldNewsArchive) {
+    public String create(JavaWorldNewsArchive javaWorldNewsArchive) {
 
         String link = javaWorldNewsArchive.getLink();
         List<JavaWorldNewsArchive> linkList = new ArrayList<>();
@@ -55,7 +55,6 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
                 transaction.begin();
                 entityManager.persist(javaWorldNewsArchive);
                 transaction.commit();
-                System.out.println("added");
 
             } catch (Exception exception) {
                 transaction.rollback();
@@ -63,8 +62,11 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
             } finally {
                 close();
             }
+            System.out.println("added");
+            return "added";
         } else {
             System.out.println("Duplicate");
+            return "duplicate";
         }
     }
 

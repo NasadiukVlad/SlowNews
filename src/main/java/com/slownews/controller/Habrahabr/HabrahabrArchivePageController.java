@@ -53,7 +53,9 @@ public class HabrahabrArchivePageController extends HttpServlet {
         for (HabrahabrNews list : yourList) {
             HabrahabrNewsArchive habrahabrNewsArchive = new HabrahabrNewsArchive(list.getTitle(), list.getDescription(), list.getLink());
             HabrahabrArchiveJpaDao habrahabrArchiveJpaDao = new HabrahabrArchiveJpaDao();
-            habrahabrArchiveJpaDao.create(habrahabrNewsArchive);
+            if (habrahabrArchiveJpaDao.create(habrahabrNewsArchive).equals("duplicate")) {
+                break;
+            }
         }
 
         res.sendRedirect("HabrahabrMainNewsController");

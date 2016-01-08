@@ -21,7 +21,7 @@ public class ArchiveJpaDao implements ArchiveDao {
     }
 
     @Override
-    public void create(NewsArchive newsArchive) {
+    public String create(NewsArchive newsArchive) {
         String link = newsArchive.getLink();
         List<NewsArchive> linkList = new ArrayList<>();
         boolean isExist = false;
@@ -63,9 +63,11 @@ public class ArchiveJpaDao implements ArchiveDao {
                 close();
             }
             System.out.println("added");
+            return ("added");
 
         } else {
             System.out.println("Duplicate");
+            return ("duplicate");
         }
 
     }

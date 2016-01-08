@@ -21,7 +21,7 @@ public class HabrahabrArchiveJpaDao implements HabrahabrArchiveDao {
     }
 
     @Override
-    public void create(HabrahabrNewsArchive habrahabrNewsArchive) {
+    public String create(HabrahabrNewsArchive habrahabrNewsArchive) {
 
         String link = habrahabrNewsArchive.getLink();
         List<HabrahabrNewsArchive> linkList = new ArrayList<>();
@@ -57,7 +57,6 @@ public class HabrahabrArchiveJpaDao implements HabrahabrArchiveDao {
                 transaction.begin();
                 entityManager.persist(habrahabrNewsArchive);
                 transaction.commit();
-                System.out.println("added");
 
             } catch (Exception exception) {
                 transaction.rollback();
@@ -65,8 +64,12 @@ public class HabrahabrArchiveJpaDao implements HabrahabrArchiveDao {
             } finally {
                 close();
             }
+
+            System.out.println("added");
+            return "added";
         } else {
             System.out.println("Duplicate");
+            return "duplicate";
         }
     }
 
