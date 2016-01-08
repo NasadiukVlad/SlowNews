@@ -6,6 +6,7 @@ import com.slownews.domain.HabrahabrNewsArchive;
 import com.slownews.domain.NewsArchive;
 import com.slownews.model.BBCNews;
 import com.slownews.model.HabrahabrNews;
+import com.slownews.service.HabrahabrNewsArchiveImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -25,19 +26,9 @@ public class HabrahabrArchivePageController extends HttpServlet {
 
         ServletContext context = getServletContext();
 
-        HabrahabrArchiveJpaDao habrahabrNewsArchiveJpaDao = new HabrahabrArchiveJpaDao();
-
-        List<HabrahabrNewsArchive> news = habrahabrNewsArchiveJpaDao.getAll();
-
+        HabrahabrNewsArchiveImpl habrahabrNewsArchive = new HabrahabrNewsArchiveImpl();
         ArrayList archive = new ArrayList();
-
-        for (int i = 0; i < news.size(); i++) {
-            HashMap items = new HashMap();
-            items.put("title", news.get(i).getTitle());
-            items.put("description", news.get(i).getDescription());
-            items.put("link", news.get(i).getLink());
-            archive.add(items);
-        }
+        archive = habrahabrNewsArchive.getHabrahabrNewsArchive();
 
         context.setAttribute("habrahabrArchiveNewsList", archive);
 
@@ -53,7 +44,7 @@ public class HabrahabrArchivePageController extends HttpServlet {
         Map<String, String[]> parametersMap = req.getParameterMap();
         ServletContext context = req.getSession().getServletContext();
 
-        List<HabrahabrNews> yourList = (List<HabrahabrNews>) context.getAttribute("habrahabrNews");
+        List<HabrahabrNews> yourList = (List<HabrahabrNews>) context.getAttribute("habraNews");
 
         Boolean archiveFlag = false;
 

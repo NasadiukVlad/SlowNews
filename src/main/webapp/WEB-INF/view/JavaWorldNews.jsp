@@ -56,7 +56,7 @@
 
   <div id="content">
 
-    <c:forEach items="${javaWorldNews}" var="element">
+    <c:forEach items="${javaNews}" var="element">
       <td><h2>${element.title}</h2></td>
       <br>
       <td>${element.description}</td>

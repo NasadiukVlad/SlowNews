@@ -24,7 +24,6 @@ public class ArchivePageController extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
 
-
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("WEB-INF/view/archive.jsp");
         rd.forward(request, response);

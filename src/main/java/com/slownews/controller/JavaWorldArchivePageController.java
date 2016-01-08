@@ -7,6 +7,7 @@ import com.slownews.domain.JavaWorldNewsArchive;
 import com.slownews.domain.NewsArchive;
 import com.slownews.model.HabrahabrNews;
 import com.slownews.model.JavaWorldNews;
+import com.slownews.service.JavaWorldArchiveImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -28,20 +29,9 @@ public class JavaWorldArchivePageController extends HttpServlet {
                          HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = getServletContext();
 
-        JavaWorldArchiveJpaDao javaWorldNewsArchiveJpaDao = new JavaWorldArchiveJpaDao();
-
-        List<JavaWorldNewsArchive> news = javaWorldNewsArchiveJpaDao.getAll();
-
+        JavaWorldArchiveImpl javaWorldArchive = new JavaWorldArchiveImpl();
         ArrayList archive = new ArrayList();
-
-        for (int i = 0; i < news.size(); i++) {
-            HashMap items = new HashMap();
-            items.put("title", news.get(i).getTitle());
-            items.put("description", news.get(i).getDescription());
-            items.put("link", news.get(i).getLink());
-            archive.add(items);
-
-        }
+        archive = javaWorldArchive.getJavaWorldNewsArchive();
 
         context.setAttribute("javaWorldArchiveNewsList", archive);
 
@@ -57,7 +47,7 @@ public class JavaWorldArchivePageController extends HttpServlet {
         Map<String, String[]> parametersMap = req.getParameterMap();
         ServletContext context = req.getSession().getServletContext();
 
-        List<JavaWorldNews> yourList = (List<JavaWorldNews>) context.getAttribute("javaWorldNews");
+        List<JavaWorldNews> yourList = (List<JavaWorldNews>) context.getAttribute("javaNews");
 
         Boolean archiveFlag = false;
 

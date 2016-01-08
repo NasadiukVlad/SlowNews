@@ -47,7 +47,6 @@ public class RegistrationController extends HttpServlet {
         usersJpaDao.addUser(user);
 
         rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
-
         rd.forward(request, response);
 
     }

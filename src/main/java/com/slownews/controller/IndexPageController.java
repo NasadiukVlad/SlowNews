@@ -8,6 +8,8 @@ import com.slownews.domain.NewsArchive;
 import com.slownews.model.BBCNews;
 import com.slownews.model.BBCXpathMap;
 import com.slownews.model.User;
+import com.slownews.service.BBCNewsImpl;
+import com.slownews.service.WeatherForecastImpl;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 
 import javax.persistence.EntityManager;
@@ -42,110 +44,12 @@ public class IndexPageController extends HttpServlet {
         ServletContext context = request.getSession().getServletContext();
         context.setAttribute("users", users);
 
+        WeatherForecastImpl weatherForecast = new WeatherForecastImpl();
+        weatherForecast.getWeatherForecast(request);
 
-        String responseEntity = ClientBuilder.newClient()
-                .target("http://api.openweathermap.org/data/2.5/weather?q=Kiev&appid=2de143494c0b295cca9337e1e96b00e0").path("")
-                .request().get(String.class);
-
-        System.out.println(responseEntity);
-
-        JsonFactory factory = new JsonFactory();
-        JsonParser parser = factory.createParser(responseEntity);
-        String skyStatus = "";
-        String name = "";
-        String temp = "";
-        String windSpeed = "";
-
-        while (!parser.isClosed()) {
-            JsonToken jsonToken = parser.nextToken();
-
-            if (JsonToken.FIELD_NAME.equals(jsonToken)) {
-                String fieldName = parser.getCurrentName();
-                // System.out.println(fieldName);
-
-
-                //   testNextToken = parser.getValueAsString();
-                if ("name".equals(fieldName)) {
-                    jsonToken = parser.nextToken();
-                    name = parser.getValueAsString();
-                    request.getSession().setAttribute("location", name);
-                }
-
-                if ("description".equals(fieldName)) {
-                    jsonToken = parser.nextToken();
-                    skyStatus = parser.getValueAsString();
-                    request.getSession().setAttribute("skyStatus", skyStatus);
-                }
-
-                if ("temp".equals(fieldName)) {
-                    jsonToken = parser.nextToken();
-                    temp = parser.getValueAsString();
-                    request.getSession().setAttribute("temp", temp);
-                }
-
-                if ("speed".equals(fieldName)) {
-                    jsonToken = parser.nextToken();
-                    windSpeed = parser.getValueAsString();
-                    request.getSession().setAttribute("windSpeed", windSpeed);
-                }
-
-                //   System.out.println("jsonToken = " + jsonToken);
-            }
-        }
-
-        JAXBContext contextJAXB = null;
-        try {
-            contextJAXB = JAXBContextFactory.createContext(new Class[]{BBCXpathMap.class}, null);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        Unmarshaller unmarshaller = null;
-        try {
-            unmarshaller = contextJAXB.createUnmarshaller();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        URL xmlURL = new URL("http://feeds.bbci.co.uk/news/technology/rss.xml");
-
-        URLConnection conn = xmlURL.openConnection();
-        conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
-        conn.connect();
-
-        InputStream xml = xmlURL.openStream();
-        BBCXpathMap bbcXpathMap = null;
-
-        try {
-            bbcXpathMap = (BBCXpathMap) unmarshaller.unmarshal(xml);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        List titles = new ArrayList<String>();
-        List links = new ArrayList<String>();
-        List descriptions = new ArrayList<String>();
-
-        titles = bbcXpathMap.getTitles();
-        links = bbcXpathMap.getLinks();
-        descriptions = bbcXpathMap.getDescriptions();
-
+        BBCNewsImpl bbcNews = new BBCNewsImpl();
         List<BBCNews> news = new LinkedList<>();
-
-        for (int i = 0; i < titles.size(); i++) {
-
-            String title = titles.get(i).toString();
-            String description = descriptions.get(i).toString();
-            String link = links.get(i).toString();
-            BBCNews newsItem = new BBCNews(title, description, link);
-            news.add(newsItem);
-
-            NewsArchive newsArchive = new NewsArchive();
-
-            newsArchive.setTitle(title);
-            newsArchive.setDescription(description);
-            newsArchive.setLink(link);
-        }
+        news = bbcNews.getNews();
 
         context.setAttribute("news", news);
 
@@ -163,7 +67,7 @@ public class IndexPageController extends HttpServlet {
         request.getSession().setAttribute("indexFlag", indexFlag);
         request.getSession().setAttribute("archiveFlag", archiveFlag);
         request.getSession().setAttribute("news", news);
-        xml.close();
+
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("WEB-INF/view/startIndex.jsp");

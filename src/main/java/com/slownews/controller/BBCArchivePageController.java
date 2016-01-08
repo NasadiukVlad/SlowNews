@@ -3,6 +3,7 @@ package com.slownews.controller;
 import com.slownews.dao.ArchiveJpaDao;
 import com.slownews.domain.NewsArchive;
 import com.slownews.model.BBCNews;
+import com.slownews.service.BBCNewsArchiveImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -19,22 +20,12 @@ import java.util.*;
 public class BBCArchivePageController extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-
-        ArchiveJpaDao archiveJpaDao = new ArchiveJpaDao();
-        NewsArchive newsArchive = new NewsArchive();
-        List<NewsArchive> news = archiveJpaDao.getAll();
         ServletContext context = getServletContext();
 
+        BBCNewsArchiveImpl bbcNewsArchive = new BBCNewsArchiveImpl();
+
         ArrayList archive = new ArrayList();
-
-        for (int i = 0; i < news.size(); i++) {
-            HashMap items = new HashMap();
-            items.put("title", news.get(i).getTitle());
-            items.put("description", news.get(i).getDescription());
-            items.put("link", news.get(i).getLink());
-            archive.add(items);
-
-        }
+        archive = bbcNewsArchive.getBBCArchive();
 
         context.setAttribute("archiveList", archive);
 

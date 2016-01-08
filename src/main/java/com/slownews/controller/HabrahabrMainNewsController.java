@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.slownews.domain.NewsArchive;
 import com.slownews.model.*;
+import com.slownews.service.HabrahabrNewsImpl;
+import com.slownews.service.WeatherForecastImpl;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 
 import javax.servlet.RequestDispatcher;
@@ -39,122 +41,15 @@ public class HabrahabrMainNewsController extends HttpServlet {
         ServletContext context = request.getSession().getServletContext();
         Object obj = context.getAttribute("users");
 
-        String responseEntity = ClientBuilder.newClient()
-                .target("http://api.openweathermap.org/data/2.5/weather?q=Kiev&appid=2de143494c0b295cca9337e1e96b00e0").path("")
-                .request().get(String.class);
+        WeatherForecastImpl weatherForecast = new WeatherForecastImpl();
+        weatherForecast.getWeatherForecast(request);
 
-        System.out.println(responseEntity);
+        HabrahabrNewsImpl habrahabrNews = new HabrahabrNewsImpl();
 
-        JsonFactory factory = new JsonFactory();
-        JsonParser parser = factory.createParser(responseEntity);
-        String skyStatus = "";
-        String name = "";
-        String temp = "";
-        String windSpeed = "";
+        List<HabrahabrNews> habraNews = new LinkedList<>();
+        habraNews = habrahabrNews.getHabrahabrNews();
 
-        while (!parser.isClosed()) {
-            JsonToken jsonToken = parser.nextToken();
-
-            if (JsonToken.FIELD_NAME.equals(jsonToken)) {
-                String fieldName = parser.getCurrentName();
-                // System.out.println(fieldName);
-
-
-                //   testNextToken = parser.getValueAsString();
-                if ("name".equals(fieldName)) {
-                    jsonToken = parser.nextToken();
-                    name = parser.getValueAsString();
-                    request.getSession().setAttribute("location", name);
-                }
-
-                if ("description".equals(fieldName)) {
-                    jsonToken = parser.nextToken();
-                    skyStatus = parser.getValueAsString();
-                    request.getSession().setAttribute("skyStatus", skyStatus);
-                }
-
-                if ("temp".equals(fieldName)) {
-                    jsonToken = parser.nextToken();
-                    temp = parser.getValueAsString();
-                    request.getSession().setAttribute("temp", temp);
-                }
-
-                if ("speed".equals(fieldName)) {
-                    jsonToken = parser.nextToken();
-                    windSpeed = parser.getValueAsString();
-                    request.getSession().setAttribute("windSpeed", windSpeed);
-                }
-
-                //   System.out.println("jsonToken = " + jsonToken);
-            }
-        }
-
-        JAXBContext contextJAXB = null;
-        try {
-            contextJAXB = JAXBContextFactory.createContext(new Class[]{HabrahabrXpathMap.class}, null);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        Unmarshaller unmarshaller = null;
-        try {
-            unmarshaller = contextJAXB.createUnmarshaller();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        URL xmlURL = new URL("http://habrahabr.ru/rss/hubs/all/");
-
-        URLConnection conn = xmlURL.openConnection();
-        conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
-        conn.connect();
-
-        InputStream xml = xmlURL.openStream();
-        HabrahabrXpathMap habrahabrXpathMap = null;
-
-        try {
-            habrahabrXpathMap = (HabrahabrXpathMap) unmarshaller.unmarshal(xml);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        List titles = new ArrayList<String>();
-        List links = new ArrayList<String>();
-        List descriptions = new ArrayList<String>();
-
-        titles = habrahabrXpathMap.getTitles();
-        links = habrahabrXpathMap.getLinks();
-        descriptions = habrahabrXpathMap.getDescriptions();
-
-        List<HabrahabrNews> habrahabrNews = new LinkedList<>();
-
-        for (int i = 0; i < titles.size(); i++) {
-            String title = titles.get(i).toString();
-            String description = descriptions.get(i).toString().replaceAll("\\<.*?>", "");
-            int decriptionLength = description.length();
-
-            StringBuilder sb = new StringBuilder();
-
-            if (decriptionLength > 450) {
-                sb.append(description.substring(0, 450));
-                sb.append("...");
-            } else {
-                sb.append(description.substring(0, decriptionLength - 21));
-            }
-
-            String link = links.get(i).toString();
-
-            HabrahabrNews newsItem = new HabrahabrNews(title, sb.toString(), link);
-            habrahabrNews.add(newsItem);
-
-            NewsArchive newsArchive = new NewsArchive();
-
-            newsArchive.setTitle(title);
-            newsArchive.setDescription(description);
-            newsArchive.setLink(link);
-
-        }
-        context.setAttribute("habrahabrNews", habrahabrNews);
+        context.setAttribute("habraNews", habraNews);
 
         Boolean indexFlag = false;
         Boolean archiveFlag = false;
@@ -170,8 +65,6 @@ public class HabrahabrMainNewsController extends HttpServlet {
         request.getSession().setAttribute("habrahabrIndexFlag", indexFlag);
         request.getSession().setAttribute("habrahabrArchiveFlag", archiveFlag);
         request.getSession().setAttribute("habrahabrNews", habrahabrNews);
-
-        xml.close();
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("WEB-INF/view/HabrahabrMainNews.jsp");
