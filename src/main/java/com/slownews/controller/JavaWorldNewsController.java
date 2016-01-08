@@ -58,10 +58,7 @@ public class JavaWorldNewsController extends HttpServlet {
 
             if (JsonToken.FIELD_NAME.equals(jsonToken)) {
                 String fieldName = parser.getCurrentName();
-                // System.out.println(fieldName);
 
-
-                //   testNextToken = parser.getValueAsString();
                 if ("name".equals(fieldName)) {
                     jsonToken = parser.nextToken();
                     name = parser.getValueAsString();
@@ -86,7 +83,6 @@ public class JavaWorldNewsController extends HttpServlet {
                     request.getSession().setAttribute("windSpeed", windSpeed);
                 }
 
-                //   System.out.println("jsonToken = " + jsonToken);
             }
         }
 
@@ -133,7 +129,7 @@ public class JavaWorldNewsController extends HttpServlet {
         for (int i = 0; i < titles.size(); i++) {
 
             String title = titles.get(i).toString();
-            String description = descriptions.get(i).toString().replaceAll("\\<.*?>","");
+            String description = descriptions.get(i).toString().replaceAll("\\<.*?>", "");
             String link = links.get(i).toString();
 
             int decriptionLength = description.length();
@@ -163,24 +159,19 @@ public class JavaWorldNewsController extends HttpServlet {
         Boolean indexFlag = false;
         Boolean archiveFlag = false;
 
-        if((Boolean)request.getSession().getAttribute("javaWorldArchiveFlag") == null) {
+        if ((Boolean) request.getSession().getAttribute("javaWorldArchiveFlag") == null) {
             indexFlag = false;
         } else {
             indexFlag = true;
         }
-        /*if((Boolean)request.getSession().getAttribute("archiveFlag") == true) {
-           indexFlag = true;
-        }*/
 
         context.setAttribute("indexFlag", indexFlag);
-
 
         request.getSession().setAttribute("javaWorldIndexFlag", indexFlag);
         request.getSession().setAttribute("javaWorldArchiveFlag", archiveFlag);
         request.getSession().setAttribute("javaWorldNews", javaWorldNews);
 
         xml.close();
-
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("WEB-INF/view/JavaWorldNews.jsp");

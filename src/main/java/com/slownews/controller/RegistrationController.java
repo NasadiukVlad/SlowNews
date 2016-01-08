@@ -35,8 +35,6 @@ public class RegistrationController extends HttpServlet {
         ServletContext context = request.getSession().getServletContext();
         Object obj = context.getAttribute("users");
 
-
-
         RequestDispatcher rd = null;
 
         String username = request.getParameter("username");
@@ -46,9 +44,6 @@ public class RegistrationController extends HttpServlet {
         Users user = new Users(username, password, userEmail);
         UsersJpaDao usersJpaDao = new UsersJpaDao();
 
-       /* if (usersJpaDao.getByLogin(username) == null) {
-
-        }*/
         usersJpaDao.addUser(user);
 
         rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");

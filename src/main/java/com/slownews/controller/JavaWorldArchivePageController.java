@@ -43,7 +43,6 @@ public class JavaWorldArchivePageController extends HttpServlet {
 
         }
 
-
         context.setAttribute("javaWorldArchiveNewsList", archive);
 
         RequestDispatcher rd = null;
@@ -55,28 +54,25 @@ public class JavaWorldArchivePageController extends HttpServlet {
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-        Map<String,String[]> parametersMap = req.getParameterMap();
+        Map<String, String[]> parametersMap = req.getParameterMap();
         ServletContext context = req.getSession().getServletContext();
 
-
-        List<JavaWorldNews> yourList = (List<JavaWorldNews>)context.getAttribute("javaWorldNews");
+        List<JavaWorldNews> yourList = (List<JavaWorldNews>) context.getAttribute("javaWorldNews");
 
         Boolean archiveFlag = false;
 
-
-        if((Boolean)req.getSession().getAttribute("javaWorldIndexFlag") == false) {
+        if ((Boolean) req.getSession().getAttribute("javaWorldIndexFlag") == false) {
             archiveFlag = true;
         }
         req.getSession().setAttribute("javaWorldAchiveFlag", archiveFlag);
 
-        for(JavaWorldNews list: yourList) {
+        for (JavaWorldNews list : yourList) {
             JavaWorldNewsArchive javaWorldNewsArchive = new JavaWorldNewsArchive(list.getTitle(), list.getDescription(), list.getLink());
             JavaWorldArchiveJpaDao javaWorldArchiveJpaDao = new JavaWorldArchiveJpaDao();
             javaWorldArchiveJpaDao.create(javaWorldNewsArchive);
         }
 
-
-        res.sendRedirect("JavaWorldMainNewsController");
+        res.sendRedirect("JavaWorldNewsController");
 
     }
 

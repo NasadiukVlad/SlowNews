@@ -20,7 +20,7 @@ public class NewsArchive {
     @Column(name = "link")
     private String link;
 
-    @Column(name = "description",columnDefinition="varchar(1000)")
+    @Column(name = "description", columnDefinition = "varchar(1000)")
     private String description;
 
     public NewsArchive(String title, String description, String link) {

@@ -37,11 +37,7 @@ public class HabrahabrArchivePageController extends HttpServlet {
             items.put("description", news.get(i).getDescription());
             items.put("link", news.get(i).getLink());
             archive.add(items);
-                /*newsArchive.setTitle(news.get(i).getTitle());
-                newsArchive.setDescription(news.get(i).getDescription());
-                newsArchive.setLink(news.get(i).getLink());*/
         }
-
 
         context.setAttribute("habrahabrArchiveNewsList", archive);
 
@@ -54,26 +50,23 @@ public class HabrahabrArchivePageController extends HttpServlet {
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-        Map<String,String[]> parametersMap = req.getParameterMap();
+        Map<String, String[]> parametersMap = req.getParameterMap();
         ServletContext context = req.getSession().getServletContext();
 
-
-        List<HabrahabrNews> yourList = (List<HabrahabrNews>)context.getAttribute("habrahabrNews");
+        List<HabrahabrNews> yourList = (List<HabrahabrNews>) context.getAttribute("habrahabrNews");
 
         Boolean archiveFlag = false;
 
-
-        if((Boolean)req.getSession().getAttribute("habrahabrIndexFlag") == false) {
+        if ((Boolean) req.getSession().getAttribute("habrahabrIndexFlag") == false) {
             archiveFlag = true;
         }
         req.getSession().setAttribute("habrahabrArchiveFlag", archiveFlag);
 
-        for(HabrahabrNews list: yourList) {
+        for (HabrahabrNews list : yourList) {
             HabrahabrNewsArchive habrahabrNewsArchive = new HabrahabrNewsArchive(list.getTitle(), list.getDescription(), list.getLink());
             HabrahabrArchiveJpaDao habrahabrArchiveJpaDao = new HabrahabrArchiveJpaDao();
             habrahabrArchiveJpaDao.create(habrahabrNewsArchive);
         }
-
 
         res.sendRedirect("HabrahabrMainNewsController");
 

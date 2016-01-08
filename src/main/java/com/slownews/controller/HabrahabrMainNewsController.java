@@ -154,12 +154,6 @@ public class HabrahabrMainNewsController extends HttpServlet {
             newsArchive.setDescription(description);
             newsArchive.setLink(link);
 
-          /*  EntityManager entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
-            entityManager.getTransaction().begin();
-            entityManager.persist(newsArchive);
-            entityManager.getTransaction().commit();
-            entityManager.close();*/
-
         }
         context.setAttribute("habrahabrNews", habrahabrNews);
 
@@ -171,9 +165,6 @@ public class HabrahabrMainNewsController extends HttpServlet {
         } else {
             indexFlag = true;
         }
-        /*if((Boolean)request.getSession().getAttribute("archiveFlag") == true) {
-           indexFlag = true;
-        }*/
 
         context.setAttribute("indexFlag", indexFlag);
 

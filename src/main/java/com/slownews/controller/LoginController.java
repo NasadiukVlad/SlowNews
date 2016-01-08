@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Created by Влад on 14.11.2015.
+ * Created by пїЅпїЅпїЅпїЅ on 14.11.2015.
  */
 
 
@@ -38,10 +38,6 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-     /*   Authenticator authenticator = new Authenticator();
-        String result = authenticator.authenticate(users, username, password);
-*/
-
         UsersJpaDao usersJpaDao = new UsersJpaDao();
         Users user = usersJpaDao.getByLogin(username);
 
@@ -58,22 +54,13 @@ public class LoginController extends HttpServlet {
         } else {
             rd = request.getRequestDispatcher("WEB-INF/view/registration.jsp");
 
+        }
+
+        rd.forward(request, response);
     }
-
-       /* if (result.equals("userCanLogin")) {
-         //   context.setAttribute("userLoged", username);
-            request.getSession().setAttribute("username", username);
-            rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
-
-        } else {
-            rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");
-        }*/
-    rd.forward(request,response);
-}
 
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("WEB-INF/view/login.jsp");

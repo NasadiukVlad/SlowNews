@@ -33,14 +33,10 @@ public class BBCArchivePageController extends HttpServlet {
             items.put("description", news.get(i).getDescription());
             items.put("link", news.get(i).getLink());
             archive.add(items);
-                /*newsArchive.setTitle(news.get(i).getTitle());
-                newsArchive.setDescription(news.get(i).getDescription());
-                newsArchive.setLink(news.get(i).getLink());*/
+
         }
 
-
         context.setAttribute("archiveList", archive);
-
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("WEB-INF/view/BBCArchive.jsp");
@@ -54,11 +50,9 @@ public class BBCArchivePageController extends HttpServlet {
         Map<String, String[]> parametersMap = req.getParameterMap();
         ServletContext context = req.getSession().getServletContext();
 
-
         List<BBCNews> yourList = (List<BBCNews>) context.getAttribute("news");
 
         Boolean archiveFlag = false;
-
 
         if ((Boolean) req.getSession().getAttribute("indexFlag") == false) {
             archiveFlag = true;
@@ -71,7 +65,6 @@ public class BBCArchivePageController extends HttpServlet {
             ArchiveJpaDao archiveJpaDao = new ArchiveJpaDao();
             archiveJpaDao.create(newsArchive);
         }
-
 
         res.sendRedirect("IndexPageController");
 

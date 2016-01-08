@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Влад on 03.01.2016.
+ * Created by пїЅпїЅпїЅпїЅ on 03.01.2016.
  */
 public class UsersJpaDao implements UsersDao {
     private EntityManagerFactory entityManagerFactory;
@@ -51,7 +51,7 @@ public class UsersJpaDao implements UsersDao {
 
         allUsersList = result.getResultList();
 
-       if (allUsersList.isEmpty()) {
+        if (allUsersList.isEmpty()) {
             return null;
         } else {
             return allUsersList.get(0);

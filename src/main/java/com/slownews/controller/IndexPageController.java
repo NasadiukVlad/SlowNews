@@ -132,7 +132,6 @@ public class IndexPageController extends HttpServlet {
 
         List<BBCNews> news = new LinkedList<>();
 
-
         for (int i = 0; i < titles.size(); i++) {
 
             String title = titles.get(i).toString();
@@ -146,34 +145,25 @@ public class IndexPageController extends HttpServlet {
             newsArchive.setTitle(title);
             newsArchive.setDescription(description);
             newsArchive.setLink(link);
-
-          /*  EntityManager entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
-            entityManager.getTransaction().begin();
-            entityManager.persist(newsArchive);
-            entityManager.getTransaction().commit();
-            entityManager.close();*/
-
         }
+
         context.setAttribute("news", news);
 
         Boolean indexFlag = false;
         Boolean archiveFlag = false;
 
-        if((Boolean)request.getSession().getAttribute("archiveFlag") == null) {
+        if ((Boolean) request.getSession().getAttribute("archiveFlag") == null) {
             indexFlag = false;
         } else {
             indexFlag = true;
         }
-        /*if((Boolean)request.getSession().getAttribute("archiveFlag") == true) {
-           indexFlag = true;
-        }*/
 
         context.setAttribute("indexFlag", indexFlag);
 
         request.getSession().setAttribute("indexFlag", indexFlag);
         request.getSession().setAttribute("archiveFlag", archiveFlag);
         request.getSession().setAttribute("news", news);
-               xml.close();
+        xml.close();
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("WEB-INF/view/startIndex.jsp");
