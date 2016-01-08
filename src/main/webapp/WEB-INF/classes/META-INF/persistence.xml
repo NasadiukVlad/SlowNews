@@ -6,10 +6,10 @@
     <persistence-unit name="SlowNewsPersistance" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>com.slownews.domain.Users</class>
-        <class>com.slownews.domain.NewsArchive</class>
-        <class>com.slownews.domain.HabrahabrNewsArchive</class>
-        <class>com.slownews.domain.JavaWorldNewsArchive</class>
+        <class>com.slownews.domain.Users.Users</class>
+        <class>com.slownews.domain.BBC.NewsArchive</class>
+        <class>com.slownews.domain.Habrahabr.HabrahabrNewsArchive</class>
+        <class>com.slownews.domain.JavaWorld.JavaWorldNewsArchive</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/SlowNews" />

@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>com.slownews.controller.LoginController</servlet-class>
+        <servlet-class>com.slownews.controller.Authorization.LoginController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>RegistrationController</servlet-name>
-        <servlet-class>com.slownews.controller.RegistrationController</servlet-class>
+        <servlet-class>com.slownews.controller.Authorization.RegistrationController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>IndexPageController</servlet-name>
-        <servlet-class>com.slownews.controller.IndexPageController</servlet-class>
+        <servlet-class>com.slownews.controller.BBC.IndexPageController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -36,7 +36,7 @@
 
     <servlet>
         <servlet-name>ArchivePageController</servlet-name>
-        <servlet-class>com.slownews.controller.ArchivePageController</servlet-class>
+        <servlet-class>com.slownews.controller.InnerPages.ArchivePageController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -46,7 +46,7 @@
 
     <servlet>
         <servlet-name>LogoutController</servlet-name>
-        <servlet-class>com.slownews.controller.LogoutController</servlet-class>
+        <servlet-class>com.slownews.controller.Authorization.LogoutController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -56,7 +56,7 @@
 
     <servlet>
         <servlet-name>HabrahabrMainNewsController</servlet-name>
-        <servlet-class>com.slownews.controller.HabrahabrMainNewsController</servlet-class>
+        <servlet-class>com.slownews.controller.Habrahabr.HabrahabrMainNewsController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -66,7 +66,7 @@
 
     <servlet>
         <servlet-name>JavaWorldNewsController</servlet-name>
-        <servlet-class>com.slownews.controller.JavaWorldNewsController</servlet-class>
+        <servlet-class>com.slownews.controller.JavaWorld.JavaWorldNewsController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -76,7 +76,7 @@
 
     <servlet>
         <servlet-name>BBCArchivePageController</servlet-name>
-        <servlet-class>com.slownews.controller.BBCArchivePageController</servlet-class>
+        <servlet-class>com.slownews.controller.BBC.BBCArchivePageController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -86,7 +86,7 @@
 
     <servlet>
     <servlet-name>HabrahabrArchivePageController</servlet-name>
-    <servlet-class>com.slownews.controller.HabrahabrArchivePageController</servlet-class>
+    <servlet-class>com.slownews.controller.Habrahabr.HabrahabrArchivePageController</servlet-class>
 </servlet>
 
     <servlet-mapping>
@@ -96,7 +96,7 @@
 
     <servlet>
         <servlet-name>JavaWorldArchivePageController</servlet-name>
-        <servlet-class>com.slownews.controller.JavaWorldArchivePageController</servlet-class>
+        <servlet-class>com.slownews.controller.JavaWorld.JavaWorldArchivePageController</servlet-class>
     </servlet>
 
     <servlet-mapping>
