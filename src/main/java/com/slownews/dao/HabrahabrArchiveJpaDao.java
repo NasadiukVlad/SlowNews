@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Влад on 06.01.2016.
+ * Created by пїЅпїЅпїЅпїЅ on 06.01.2016.
  */
 public class HabrahabrArchiveJpaDao implements HabrahabrArchiveDao {
     private EntityManagerFactory entityManagerFactory;
@@ -26,27 +26,46 @@ public class HabrahabrArchiveJpaDao implements HabrahabrArchiveDao {
 
         String link = habrahabrNewsArchive.getLink();
         List<HabrahabrNewsArchive> linkList = new ArrayList<>();
-
-        TypedQuery<HabrahabrNewsArchive> result = null;
-        result = entityManager.createQuery("SELECT habrahabrNewsArchive FROM HabrahabrNewsArchive habrahabrNewsArchive",
-                HabrahabrNewsArchive.class);
-
-        linkList = result.getResultList();
-
         boolean isExist = false;
-        for (HabrahabrNewsArchive newsArchiveResult : linkList) {
-            String resultString = newsArchiveResult.getLink();
-            if (link.equals(resultString)) {
-                isExist = true;
+
+        try {
+            transaction.begin();
+            TypedQuery<HabrahabrNewsArchive> result = null;
+            result = entityManager.createQuery("SELECT habrahabrNewsArchive FROM HabrahabrNewsArchive habrahabrNewsArchive",
+                    HabrahabrNewsArchive.class);
+            transaction.commit();
+            linkList = result.getResultList();
+
+            for (HabrahabrNewsArchive newsArchiveResult : linkList) {
+                String resultString = newsArchiveResult.getLink();
+                if (link.equals(resultString)) {
+                    isExist = true;
+                }
             }
+
+        } catch (Exception exception) {
+            transaction.rollback();
+
+        } finally {
+            close();
         }
 
         if (!isExist) {
-            transaction.begin();
-            entityManager.persist(habrahabrNewsArchive);
-            transaction.commit();
-            System.out.println("added");
+            entityManagerFactory = Persistence.createEntityManagerFactory("SlowNewsPersistance");
+            entityManager = entityManagerFactory.createEntityManager();
+            transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(habrahabrNewsArchive);
+                transaction.commit();
+                System.out.println("added");
 
+            } catch (Exception exception) {
+                transaction.rollback();
+
+            } finally {
+                close();
+            }
         } else {
             System.out.println("Duplicate");
         }
@@ -55,12 +74,27 @@ public class HabrahabrArchiveJpaDao implements HabrahabrArchiveDao {
     @Override
     public List<HabrahabrNewsArchive> getAll() {
         List<HabrahabrNewsArchive> archiveListResult = new ArrayList<>();
+        try {
+            transaction.begin();
+            TypedQuery<HabrahabrNewsArchive> resultArchive =
+                    entityManager.createQuery("SELECT habrahabrNewsArchive FROM HabrahabrNewsArchive habrahabrNewsArchive", HabrahabrNewsArchive.class);
+            transaction.commit();
+            archiveListResult = resultArchive.getResultList();
 
-        transaction.begin();
-        TypedQuery<HabrahabrNewsArchive> resultArchive =
-                entityManager.createQuery("SELECT habrahabrNewsArchive FROM HabrahabrNewsArchive habrahabrNewsArchive", HabrahabrNewsArchive.class);
-        transaction.commit();
-        archiveListResult = resultArchive.getResultList();
+        } catch (Exception exception) {
+            transaction.rollback();
+
+        } finally {
+            close();
+        }
+
         return archiveListResult;
+    }
+
+    @Override
+    public void close() {
+        if (entityManager != null) {
+            entityManager.close();
+        }
     }
 }

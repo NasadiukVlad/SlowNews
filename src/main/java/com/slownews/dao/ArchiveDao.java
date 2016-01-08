@@ -10,4 +10,5 @@ import java.util.List;
 public interface ArchiveDao {
     void create(NewsArchive newsArchive);
     List<NewsArchive> getAll();
+    void close();
 }

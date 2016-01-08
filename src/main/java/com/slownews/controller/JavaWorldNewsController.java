@@ -39,7 +39,6 @@ public class JavaWorldNewsController extends HttpServlet {
         ServletContext context = request.getSession().getServletContext();
         Object obj = context.getAttribute("users");
 
-
         String responseEntity = ClientBuilder.newClient()
                 .target("http://api.openweathermap.org/data/2.5/weather?q=Kiev&appid=2de143494c0b295cca9337e1e96b00e0").path("")
                 .request().get(String.class);

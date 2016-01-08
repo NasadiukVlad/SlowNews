@@ -11,4 +11,5 @@ public interface UsersDao {
     void addUser(Users user);
     List<Users> getAll();
     Users getByLogin(String login);
+    void close();
 }

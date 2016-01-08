@@ -26,27 +26,46 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
 
         String link = javaWorldNewsArchive.getLink();
         List<JavaWorldNewsArchive> linkList = new ArrayList<>();
-
-        TypedQuery<JavaWorldNewsArchive> result = null;
-        result = entityManager.createQuery("SELECT javaWorldNewsArchive FROM JavaWorldNewsArchive javaWorldNewsArchive",
-                JavaWorldNewsArchive.class);
-
-        linkList = result.getResultList();
-
         boolean isExist = false;
-        for (JavaWorldNewsArchive newsArchiveResult : linkList) {
-            String resultString = newsArchiveResult.getLink();
-            if (link.equals(resultString)) {
-                isExist = true;
+
+        try {
+            transaction.begin();
+            TypedQuery<JavaWorldNewsArchive> result = null;
+            result = entityManager.createQuery("SELECT javaWorldNewsArchive FROM JavaWorldNewsArchive javaWorldNewsArchive",
+                    JavaWorldNewsArchive.class);
+            transaction.commit();
+            linkList = result.getResultList();
+
+            for (JavaWorldNewsArchive newsArchiveResult : linkList) {
+                String resultString = newsArchiveResult.getLink();
+                if (link.equals(resultString)) {
+                    isExist = true;
+                }
             }
+
+        } catch (Exception exception) {
+            transaction.rollback();
+
+        } finally {
+            close();
         }
 
         if (!isExist) {
-            transaction.begin();
-            entityManager.persist(javaWorldNewsArchive);
-            transaction.commit();
-            System.out.println("added");
+            entityManagerFactory = Persistence.createEntityManagerFactory("SlowNewsPersistance");
+            entityManager = entityManagerFactory.createEntityManager();
+            transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(javaWorldNewsArchive);
+                transaction.commit();
+                System.out.println("added");
 
+            } catch (Exception exception) {
+                transaction.rollback();
+
+            } finally {
+                close();
+            }
         } else {
             System.out.println("Duplicate");
         }
@@ -55,12 +74,27 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
     @Override
     public List<JavaWorldNewsArchive> getAll() {
         List<JavaWorldNewsArchive> archiveListResult = new ArrayList<>();
+        try {
+            transaction.begin();
+            TypedQuery<JavaWorldNewsArchive> resultArchive =
+                    entityManager.createQuery("SELECT javaWorldNewsArchive FROM JavaWorldNewsArchive javaWorldNewsArchive", JavaWorldNewsArchive.class);
+            transaction.commit();
+            archiveListResult = resultArchive.getResultList();
 
-        transaction.begin();
-        TypedQuery<JavaWorldNewsArchive> resultArchive =
-                entityManager.createQuery("SELECT javaWorldNewsArchive FROM JavaWorldNewsArchive javaWorldNewsArchive", JavaWorldNewsArchive.class);
-        transaction.commit();
-        archiveListResult = resultArchive.getResultList();
+        } catch (Exception exception) {
+            transaction.rollback();
+
+        } finally {
+            close();
+        }
+
         return archiveListResult;
+    }
+
+    @Override
+    public void close() {
+        if (entityManager != null) {
+            entityManager.close();
+        }
     }
 }

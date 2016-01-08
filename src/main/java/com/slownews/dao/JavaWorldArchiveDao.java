@@ -11,4 +11,5 @@ import java.util.List;
 public interface JavaWorldArchiveDao {
     void create(JavaWorldNewsArchive javaWorldNewsArchive);
     List<JavaWorldNewsArchive> getAll();
+    void close();
 }

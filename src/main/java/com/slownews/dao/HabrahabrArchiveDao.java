@@ -11,4 +11,5 @@ import java.util.List;
 public interface HabrahabrArchiveDao {
     void create(HabrahabrNewsArchive habrahabrNewsArchive);
     List<HabrahabrNewsArchive> getAll();
+    void close();
 }

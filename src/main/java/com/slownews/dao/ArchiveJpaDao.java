@@ -25,25 +25,44 @@ public class ArchiveJpaDao implements ArchiveDao {
     public void create(NewsArchive newsArchive) {
         String link = newsArchive.getLink();
         List<NewsArchive> linkList = new ArrayList<>();
-
-        TypedQuery<NewsArchive> result = null;
-        result = entityManager.createQuery("SELECT newsArchive FROM NewsArchive newsArchive",
-                NewsArchive.class);
-
-        linkList = result.getResultList();
-
         boolean isExist = false;
-        for (NewsArchive newsArchiveResult : linkList) {
-            String resultString = newsArchiveResult.getLink();
-            if (link.equals(resultString)) {
-                isExist = true;
+        try {
+            transaction.begin();
+            TypedQuery<NewsArchive> result = null;
+            result = entityManager.createQuery("SELECT newsArchive FROM NewsArchive newsArchive",
+                    NewsArchive.class);
+            transaction.commit();
+            linkList = result.getResultList();
+
+            for (NewsArchive newsArchiveResult : linkList) {
+                String resultString = newsArchiveResult.getLink();
+                if (link.equals(resultString)) {
+                    isExist = true;
+                }
             }
+
+        } catch (Exception exception) {
+            transaction.rollback();
+
+        } finally {
+            close();
         }
 
         if (!isExist) {
-            transaction.begin();
-            entityManager.persist(newsArchive);
-            transaction.commit();
+            entityManagerFactory = Persistence.createEntityManagerFactory("SlowNewsPersistance");
+            entityManager = entityManagerFactory.createEntityManager();
+            transaction = entityManager.getTransaction();
+            try {
+                transaction.begin();
+                entityManager.persist(newsArchive);
+                transaction.commit();
+
+            } catch (Exception exception) {
+                transaction.rollback();
+
+            } finally {
+                close();
+            }
             System.out.println("added");
 
         } else {
@@ -55,12 +74,26 @@ public class ArchiveJpaDao implements ArchiveDao {
     @Override
     public List<NewsArchive> getAll() {
         List<NewsArchive> archiveListResult = new ArrayList<>();
+        try {
+            transaction.begin();
+            TypedQuery<NewsArchive> resultArchive =
+                    entityManager.createQuery("SELECT newsArchive FROM NewsArchive newsArchive", NewsArchive.class);
+            transaction.commit();
+            archiveListResult = resultArchive.getResultList();
 
-        transaction.begin();
-        TypedQuery<NewsArchive> resultArchive =
-                entityManager.createQuery("SELECT newsArchive FROM NewsArchive newsArchive", NewsArchive.class);
-        transaction.commit();
-        archiveListResult = resultArchive.getResultList();
+        } catch (Exception exception) {
+            transaction.rollback();
+
+        } finally {
+            close();
+        }
         return archiveListResult;
+    }
+
+    @Override
+    public void close() {
+        if (entityManager != null) {
+            entityManager.close();
+        }
     }
 }

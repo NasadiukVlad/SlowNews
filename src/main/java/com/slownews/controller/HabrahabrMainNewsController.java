@@ -39,7 +39,6 @@ public class HabrahabrMainNewsController extends HttpServlet {
         ServletContext context = request.getSession().getServletContext();
         Object obj = context.getAttribute("users");
 
-
         String responseEntity = ClientBuilder.newClient()
                 .target("http://api.openweathermap.org/data/2.5/weather?q=Kiev&appid=2de143494c0b295cca9337e1e96b00e0").path("")
                 .request().get(String.class);
@@ -167,7 +166,6 @@ public class HabrahabrMainNewsController extends HttpServlet {
         }
 
         context.setAttribute("indexFlag", indexFlag);
-
 
         request.getSession().setAttribute("habrahabrIndexFlag", indexFlag);
         request.getSession().setAttribute("habrahabrArchiveFlag", archiveFlag);
