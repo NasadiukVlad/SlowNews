@@ -35,33 +35,5 @@ public class User {
         this.password = password;
     }
 
-
-
-        /*private static volatile User instance;
-
-        private Map<String, String> users;
-
-        private User() {
-            users = new HashMap<>();
-        }
-
-        public synchronized static User getInstance() {
-            if (instance == null) {
-                instance = new User();
-            }
-            return instance;
-
-        }
-
-        public synchronized Map<String, String> getUsers() {
-            return users;
-        }
-
-        public synchronized void setUsers(String username, String password) {
-            users.put(username, password);
-
-        }
-*/
-
 }
 
