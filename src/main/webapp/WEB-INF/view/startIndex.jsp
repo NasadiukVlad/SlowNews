@@ -10,17 +10,19 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript" src="js/jsCounter.js"></script>
     <script type="text/javascript" src="js/scrollOnTop.js"></script>
-
+    <%--<link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />--%>
+    <link rel="shortcut icon" href="images/favicon.png" />
 </head>
 
 <body>
-<div id="page_align">
+<div id="page_align" class="page_align">
 
-    <div id="sidebar">
+    <div id="sidebar" class="sidebar">
 
         <a href="IndexPageController">
 
-            <div id="logo_side_bar">
+            <div id="logo_side_bar" class="logo_side_bar">
                 <img src="images/logo.jpg">
                 News, from the last enter:
                 <div id="counter"></div>
@@ -28,27 +30,27 @@
 
         </a>
 
-        <div id="left_navigation">
+        <div id="left_navigation" class="left_navigation">
             <jsp:include page="includeLeftNavigation.jsp"/>
         </div>
 
-        <div id="left_content2">
+        <div id="left_content2" class="left_content2">
             <jsp:include page="includeWeatherForecast.jsp"/>
 
         </div>
 
     </div>
 
-    <div id="top_menu">
+    <div id="top_menu" class="top_menu">
         <jsp:include page="includeTopMenu.jsp"/>
         <c:if test="${not empty username}">
-            <div id="user_login">
+            <div id="user_login" class="user_login">
                 Welcome, ${username}! You can <a href="LogoutController" class="top_menu_logout_a">logout</a>
             </div>
         </c:if>
     </div>
 
-    <div id="content">
+    <div id="content" class="content">
 
         <c:forEach items="${news}" var="element">
             <td><h2>${element.title}</h2></td>
@@ -74,7 +76,7 @@
 
     </div>
 
-    <a href="#" id="toTop">TOP!</a>
+    <a href="#" id="toTop" class="toTop">TOP!</a>
 
 </div>
 

@@ -51,6 +51,9 @@ public class JavaWorldArchiveJpaDao implements JavaWorldArchiveDao {
         }
 
         if (!isExist) {
+            entityManagerFactory = Persistence.createEntityManagerFactory("SlowNewsPersistance");
+            entityManager = entityManagerFactory.createEntityManager();
+            transaction = entityManager.getTransaction();
             try {
                 transaction.begin();
                 entityManager.persist(javaWorldNewsArchive);
